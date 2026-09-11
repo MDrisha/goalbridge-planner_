@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GoalBridge is an educational goal-planning tool for first-time earners to explore how inflation, time, existing savings, and assumed returns shape future goals.">
+  <title>GoalBridge — Educational Scenario Planner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Site Header -->
+  <header class="site-header" role="banner">
+    <div class="header-container">
+      <div class="brand-group">
+        <a href="#" class="brand-logo" aria-label="GoalBridge Home">
+          <svg class="brand-icon" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="28" height="28" rx="6" fill="#0F766E"/>
+            <path d="M6 19C9 14 12 11 14 11C16 11 19 14 22 19" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M14 11V21" stroke="#5EEAD4" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="14" cy="7" r="2" fill="#FFFFFF"/>
+          </svg>
+          <span class="brand-name">GoalBridge</span>
+        </a>
+        <span class="brand-badge" role="note">Educational Scenario Planner</span>
+      </div>
+      <div class="header-tagline">
+        <span class="privacy-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          Private &amp; In-Browser
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-container" id="main-content" role="main">
+    
+    <!-- Hero Section -->
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <h1 id="hero-title" class="hero-headline">Turn a future goal into a monthly planning scenario.</h1>
+        <p class="hero-description">
+          Explore how inflation, time, existing savings and an assumed annual return shape an illustrative monthly contribution.
+        </p>
+      </div>
+    </section>
+
+    <!-- Two-Column Application Layout -->
+    <div class="app-layout">
+
+      <!-- LEFT COLUMN: Scenario Input Builder -->
+      <section class="scenario-builder-column" aria-labelledby="builder-title">
+        <div class="card builder-card">
+          <div class="card-header">
+            <h2 id="builder-title" class="card-title">Build your scenario</h2>
+            <p class="card-subtitle">Adjust your assumptions to explore different planning paths.</p>
+          </div>
+
+          <form id="scenarioForm" class="scenario-form" novalidate>
+            
+            <!-- 1. What are you planning for? (Goal Library & Custom Goal) -->
+            <div class="form-group goal-planning-form-group">
+              <label class="form-label" id="goalPlanningLabel">
+                1. What are you planning for?
+              </label>
+              <span class="input-hint" id="goalPlanningHint">
+                Choose from the goal library or create your own custom goal.
+              </span>
+
+              <!-- Goal Library Component -->
+              <div class="goal-library-container" id="goalLibraryContainer" role="region" aria-labelledby="goalPlanningLabel">
+                <!-- Category Navigation Tabs -->
+                <div class="category-nav-wrap">
+                  <div class="category-nav-scroll" role="tablist" aria-label="Goal Categories" id="categoryNav"></div>
+                </div>
+
+                <!-- Goal Cards Panel Wrapper -->
+                <div class="goal-cards-wrapper" id="goalCardsWrapper" role="region" aria-label="Goal options"></div>
+              </div>
+
+              <!-- Goal Name Input Field -->
+              <div class="goal-name-field-wrap" id="goalNameFieldWrap">
+                <label for="goalName" class="goal-name-sublabel">
+                  Goal Name <span class="required-star" aria-hidden="true">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="goalName" 
+                  name="goalName" 
+                  class="form-input text-input" 
+                  value="Higher Education Fund" 
+                  placeholder="e.g., Higher Education Fund" 
+                  required
+                  aria-describedby="goalNameHint"
+                >
+                <span id="goalNameHint" class="input-hint">Descriptive goal name. No personal name or private information is requested.</span>
+              </div>
+            </div>
+
+            <!-- 2. How much would this goal cost today? -->
+            <div class="form-group">
+              <label for="goalCostToday" class="form-label">
+                2. How much would this goal cost today?
+              </label>
+              <div class="input-affix-group">
+                <span class="input-prefix" aria-hidden="true">₹</span>
+                <input 
+                  type="number" 
+                  id="goalCostToday" 
+                  name="goalCostToday" 
+                  class="form-input affix-input" 
+                  value="1200000" 
+                  min="1" 
+                  step="any" 
+                  placeholder="12,00,000" 
+                  required
+                  aria-label="How much would this goal cost today in Indian Rupees"
+                  aria-describedby="goalCostHint"
+                >
+                <span class="input-suffix currency-tag" aria-hidden="true">INR</span>
+              </div>
+              <span id="goalCostHint" class="input-hint">Current cost in today's money (₹12,00,000).</span>
+            </div>
+
+            <!-- 3. How many years until the goal? -->
+            <div class="form-group">
+              <label for="targetYears" class="form-label">
+                3. How many years until the goal?
+              </label>
+              <div class="input-affix-group">
+                <input 
+                  type="number" 
+                  id="targetYears" 
+                  name="targetYears" 
+                  class="form-input affix-input-left" 
+                  value="8" 
+                  min="1" 
+                  max="100" 
+                  step="1" 
+                  placeholder="8" 
+                  required
+                  aria-describedby="targetYearsHint"
+                >
+                <span class="input-suffix" aria-hidden="true">Years</span>
+              </div>
+              <span id="targetYearsHint" class="input-hint">Target planning horizon for this goal.</span>
+            </div>
+
+            <!-- 4. Expected annual inflation -->
+            <div class="form-group">
+              <label for="inflationRate" class="form-label">
+                4. Expected annual inflation
+              </label>
+              <div class="input-affix-group">
+                <input 
+                  type="number" 
+                  id="inflationRate" 
+                  name="inflationRate" 
+                  class="form-input affix-input-left" 
+                  value="6" 
+                  min="0" 
+                  max="50" 
+                  step="any" 
+                  placeholder="6" 
+                  required
+                  aria-describedby="inflationRateHint"
+                >
+                <span class="input-suffix" aria-hidden="true">% per year</span>
+              </div>
+              <span id="inflationRateHint" class="input-hint">Anticipated price growth over time (typically 5%–7%).</span>
+            </div>
+
+            <!-- 5. Expected annual investment return -->
+            <div class="form-group">
+              <label for="investmentReturn" class="form-label">
+                5. Expected annual investment return
+              </label>
+              <div class="input-affix-group">
+                <input 
+                  type="number" 
+                  id="investmentReturn" 
+                  name="investmentReturn" 
+                  class="form-input affix-input-left" 
+                  value="10" 
+                  min="0" 
+                  max="100" 
+                  step="any" 
+                  placeholder="10" 
+                  required
+                  aria-describedby="investmentReturnHint"
+                >
+                <span class="input-suffix" aria-hidden="true">% per year</span>
+              </div>
+              <span id="investmentReturnHint" class="input-hint">Hypothetical compounding rate (illustrative, not guaranteed).</span>
+            </div>
+
+            <!-- 6. How much have you already saved for this goal? -->
+            <div class="form-group">
+              <label for="currentSavings" class="form-label">
+                6. How much have you already saved for this goal?
+              </label>
+              <div class="input-affix-group">
+                <span class="input-prefix" aria-hidden="true">₹</span>
+                <input 
+                  type="number" 
+                  id="currentSavings" 
+                  name="currentSavings" 
+                  class="form-input affix-input" 
+                  value="150000" 
+                  min="0" 
+                  step="any" 
+                  placeholder="1,50,000" 
+                  required
+                  aria-label="How much have you already saved for this goal in Indian Rupees"
+                  aria-describedby="currentSavingsHint"
+                >
+                <span class="input-suffix currency-tag" aria-hidden="true">INR</span>
+              </div>
+              <span id="currentSavingsHint" class="input-hint">Existing savings already allocated to this goal.</span>
+            </div>
+
+            <!-- Form Action Buttons -->
+            <div class="form-actions">
+              <button type="button" id="calculateBtn" class="btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>Calculate My Scenario</span>
+              </button>
+              <button type="button" id="resetBtn" class="btn btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                  <path d="M3 3v5h5"></path>
+                </svg>
+                <span>Reset</span>
+              </button>
+            </div>
+
+            <div id="statusMessage" class="sr-only" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: Results, Visualization & Educational Commentary -->
+      <section class="scenario-results-column" aria-labelledby="results-title">
+        
+        <!-- Results Section Header -->
+        <div class="results-header">
+          <div class="results-header-text">
+            <span class="section-eyebrow">Scenario Projection</span>
+            <h2 id="results-title" class="section-title">Your scenario</h2>
+          </div>
+          <span class="scenario-target-badge" id="displayGoalBadge">Higher Education Fund (8 Yrs)</span>
+        </div>
+
+        <!-- Prominent Monthly Contribution Card -->
+        <div class="card result-card prominent-card" aria-labelledby="monthly-contrib-label">
+          <div class="prominent-card-inner">
+            <div class="prominent-label-wrap">
+              <span class="prominent-tag">Primary Planning Output</span>
+              <h3 id="monthly-contrib-label" class="prominent-label">Estimated monthly contribution</h3>
+              <p class="prominent-subtext" id="prominentSubtext">Illustrative estimate based on the assumptions entered.</p>
+            </div>
+            <div class="prominent-value-box">
+              <div class="prominent-metric">
+                <span class="metric-value prominent-value" id="monthlyContributionVal">₹10,808</span>
+                <span class="metric-unit prominent-unit">/ month</span>
+              </div>
+              <span class="prominent-annotation" id="prominentAnnotation">Illustrative scenario estimate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Metric Cards Grid -->
+        <div class="metrics-grid" role="region" aria-label="Scenario Breakdown Metrics">
+          
+          <!-- Metric 1: Estimated Goal Cost at Target Date -->
+          <div class="card metric-card">
+            <div class="metric-header">
+              <div class="metric-icon-wrap" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <span class="metric-status-tag">Inflation Adjusted</span>
+            </div>
+            <h3 class="metric-label">Estimated goal cost at target date</h3>
+            <p class="metric-value" id="futureGoalCostVal">₹19,12,618</p>
+            <p class="metric-explanation" id="futureGoalCostExpl">Today's ₹12,00,000 adjusted for 6% annual inflation over 8 years.</p>
+          </div>
+
+          <!-- Metric 2: Current Savings Projected Value -->
+          <div class="card metric-card">
+            <div class="metric-header">
+              <div class="metric-icon-wrap" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </div>
+              <span class="metric-status-tag">Compounded</span>
+            </div>
+            <h3 class="metric-label">Current savings projected value</h3>
+            <p class="metric-value" id="projectedSavingsVal">₹3,32,726</p>
+            <p class="metric-explanation" id="projectedSavingsExpl">Existing ₹1,50,000 with an illustrative projected value of ₹3,32,726 at an assumed 10% annual return over 8 years.</p>
+          </div>
+
+          <!-- Metric 3: Estimated Funding Gap -->
+          <div class="card metric-card metric-card-gap">
+            <div class="metric-header">
+              <div class="metric-icon-wrap gap-icon-wrap" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+              </div>
+              <span class="metric-status-tag gap-tag">Net Remaining</span>
+            </div>
+            <h3 class="metric-label">Estimated funding gap</h3>
+            <p class="metric-value text-gap" id="fundingGapVal">₹15,79,891</p>
+            <p class="metric-explanation" id="fundingGapExpl">Target cost minus the projected future value of current savings.</p>
+          </div>
+
+        </div>
+
+        <!-- Additional Results Section -->
+        <div class="card additional-results-card" aria-labelledby="additional-results-title">
+          <h3 id="additional-results-title" class="additional-results-heading">Additional scenario details</h3>
+          <div class="additional-metrics-row">
+            
+            <div class="additional-item">
+              <span class="additional-label">Total contributions over the remaining period</span>
+              <div class="additional-val-row">
+                <span class="additional-value" id="totalContributionsVal">₹10,37,546</span>
+                <span class="additional-subnote" id="totalContributionsSubnote">(96 monthly installments)</span>
+              </div>
+              <p class="additional-desc" id="totalContributionsDesc">Total cumulative out-of-pocket amount contributed across 8 years.</p>
+            </div>
+
+            <div class="additional-divider" aria-hidden="true"></div>
+
+            <div class="additional-item">
+              <span class="additional-label">Illustrative projected growth</span>
+              <div class="additional-val-row">
+                <span class="additional-value text-growth" id="projectedGrowthVal">₹5,42,345</span>
+                <span class="additional-subnote" id="projectedGrowthSubnote">(From compounding)</span>
+              </div>
+              <p class="additional-desc" id="projectedGrowthDesc">Illustrative projected growth based on the assumed return.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Visual Comparison Section -->
+        <div class="card visual-comparison-card" aria-labelledby="viz-title">
+          <div class="viz-header">
+            <div>
+              <h3 id="viz-title" class="viz-heading">Visual Comparison</h3>
+              <p class="viz-subhead">Horizontal comparison of target cost, projected savings, and funding gap.</p>
+            </div>
+            <span class="viz-badge">Proportional Scale</span>
+          </div>
+
+          <!-- Functional Responsive Horizontal Comparison Bars -->
+          <div class="comparison-viz" role="region" aria-label="Goal cost and funding visual comparison">
+            
+            <!-- 1. Estimated Goal Cost at Target Date -->
+            <div class="comparison-row">
+              <div class="comparison-label-row">
+                <span class="comparison-label">
+                  <span class="comparison-bullet bullet-cost" aria-hidden="true"></span>
+                  Estimated goal cost at target date
+                </span>
+                <span class="comparison-values">
+                  <strong class="comparison-compact" id="vizCostCompact">₹19.13L</strong>
+                  <span class="comparison-precise" id="vizCostPrecise">(₹19,12,618)</span>
+                </span>
+              </div>
+              <div class="comparison-track" id="vizCostTrack" role="progressbar" aria-label="Estimated goal cost at target date" aria-valuemin="0" aria-valuemax="1912618" aria-valuenow="1912618" aria-valuetext="₹19,12,618">
+                <div class="comparison-bar-fill bar-cost" id="vizBarCost" style="width: 100%;"></div>
+              </div>
+            </div>
+
+            <!-- 2. Projected Future Value of Current Savings -->
+            <div class="comparison-row">
+              <div class="comparison-label-row">
+                <span class="comparison-label">
+                  <span class="comparison-bullet bullet-savings" aria-hidden="true"></span>
+                  Projected future value of current savings
+                </span>
+                <span class="comparison-values">
+                  <strong class="comparison-compact" id="vizSavingsCompact">₹3.33L</strong>
+                  <span class="comparison-precise" id="vizSavingsPrecise">(₹3,32,726)</span>
+                </span>
+              </div>
+              <div class="comparison-track" id="vizSavingsTrack" role="progressbar" aria-label="Projected future value of current savings" aria-valuemin="0" aria-valuemax="1912618" aria-valuenow="332726" aria-valuetext="₹3,32,726">
+                <div class="comparison-bar-fill bar-savings" id="vizBarSavings" style="width: 17.4%;"></div>
+              </div>
+            </div>
+
+            <!-- 3. Estimated Funding Gap -->
+            <div class="comparison-row">
+              <div class="comparison-label-row">
+                <span class="comparison-label">
+                  <span class="comparison-bullet bullet-gap" aria-hidden="true"></span>
+                  Estimated funding gap
+                </span>
+                <span class="comparison-values">
+                  <strong class="comparison-compact" id="vizGapCompact">₹15.8L</strong>
+                  <span class="comparison-precise" id="vizGapPrecise">(₹15,79,891)</span>
+                </span>
+              </div>
+              <div class="comparison-track" id="vizGapTrack" role="progressbar" aria-label="Estimated funding gap" aria-valuemin="0" aria-valuemax="1912618" aria-valuenow="1579891" aria-valuetext="₹15,79,891">
+                <div class="comparison-bar-fill bar-gap" id="vizBarGap" style="width: 82.6%;"></div>
+              </div>
+            </div>
+
+            <p class="viz-caption" id="vizCaption">
+              Bars are scaled proportionally to the largest value in this scenario. Values and labels convey full comparison information independently of color.
+            </p>
+          </div>
+        </div>
+
+        <!-- Plain-language Summary -->
+        <div class="card summary-card" aria-labelledby="summary-title">
+          <div class="summary-icon-row">
+            <div class="summary-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            </div>
+            <h3 id="summary-title" class="summary-title">What this scenario means</h3>
+          </div>
+          <div class="summary-body" id="summaryBody">
+            <p id="summaryPara1"></p>
+            <p id="summaryPara2"></p>
+            <p id="summaryPara3"></p>
+            <p id="summaryPara4" class="summary-disclaimer-note"></p>
+            <div class="summary-takeaway">
+              <span class="takeaway-label">Key takeaway:</span>
+              <span>A longer planning timeline provides more compounding intervals, which can reduce the illustrative monthly contribution.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculation Methodology (Expandable Section) -->
+        <div class="card methodology-card">
+          <details class="methodology-accordion" id="methodologyDetails">
+            <summary class="methodology-summary">
+              <span class="summary-title-group">
+                <svg class="summary-caret" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                <span class="summary-text">How was this calculated?</span>
+              </span>
+              <span class="summary-badge">Methodology &amp; Formulas</span>
+            </summary>
+            
+            <div class="methodology-content">
+              <p class="methodology-intro">
+                This educational scenario planner uses standard time-value-of-money equations with monthly compounding and end-of-month contribution assumptions:
+              </p>
+
+              <div class="formula-grid">
+                <!-- Basis: Monthly Rates -->
+                <div class="formula-block">
+                  <div class="formula-header">
+                    <span class="step-num">Basis</span>
+                    <h4 class="formula-name">Monthly Rate Conversion</h4>
+                  </div>
+                  <div class="formula-code" role="region" aria-label="Formula for Monthly Rate">
+                    <code>Annual rate / 12 = monthly rate</code>
+                  </div>
+                  <p class="formula-desc">
+                    Annual inflation and assumed return rates are divided by 12 to derive monthly rates. Total duration is calculated as <em>years &times; 12 = months</em>.
+                  </p>
+                </div>
+
+                <!-- Step 1: Future Goal Value -->
+                <div class="formula-block">
+                  <div class="formula-header">
+                    <span class="step-num">Step 1</span>
+                    <h4 class="formula-name">Future Goal Value</h4>
+                  </div>
+                  <div class="formula-code" role="region" aria-label="Formula for Future Goal Value">
+                    <code>Today's goal cost &times; (1 + inflation)<sup>years</sup></code>
+                  </div>
+                  <p class="formula-desc">
+                    Calculates how purchasing power shifts across the target timeline. If inflation is 0%, the future goal value equals today's goal cost.
+                  </p>
+                </div>
+
+                <!-- Step 2: Future Value of Current Savings -->
+                <div class="formula-block">
+                  <div class="formula-header">
+                    <span class="step-num">Step 2</span>
+                    <h4 class="formula-name">Future Value of Current Savings</h4>
+                  </div>
+                  <div class="formula-code" role="region" aria-label="Formula for Current Savings Future Value">
+                    <code>Current savings &times; (1 + monthly return)<sup>months</sup></code>
+                  </div>
+                  <p class="formula-desc">
+                    Compounding projection for current savings using monthly compounding over the total months.
+                  </p>
+                </div>
+
+                <!-- Step 3: Funding Gap -->
+                <div class="formula-block">
+                  <div class="formula-header">
+                    <span class="step-num">Step 3</span>
+                    <h4 class="formula-name">Funding Gap</h4>
+                  </div>
+                  <div class="formula-code" role="region" aria-label="Formula for Funding Gap">
+                    <code>Future goal value &minus; future value of current savings</code>
+                  </div>
+                  <p class="formula-desc">
+                    The remaining net requirement. If projected savings equal or exceed the future goal, the funding gap is ₹0.
+                  </p>
+                </div>
+
+                <!-- Step 4: Monthly Contribution -->
+                <div class="formula-block">
+                  <div class="formula-header">
+                    <span class="step-num">Step 4</span>
+                    <h4 class="formula-name">Monthly Contribution</h4>
+                  </div>
+                  <div class="formula-code" role="region" aria-label="Formula for Monthly Contribution">
+                    <code>Funding gap &times; monthly rate / ((1 + monthly rate)<sup>months</sup> &minus; 1)</code>
+                  </div>
+                  <p class="formula-desc">
+                    Calculates the illustrative deposit at the end of each month given an assumed positive return.
+                  </p>
+                </div>
+
+                <!-- Zero-Return Fallback -->
+                <div class="formula-block">
+                  <div class="formula-header">
+                    <span class="step-num">Fallback</span>
+                    <h4 class="formula-name">Zero-Return Fallback</h4>
+                  </div>
+                  <div class="formula-code" role="region" aria-label="Formula for Zero Return Fallback">
+                    <code>Funding gap / months</code>
+                  </div>
+                  <p class="formula-desc">
+                    If the assumed annual return is 0%, the monthly contribution is calculated linearly without compounding as <em>Funding gap / months</em>, and projected growth is ₹0.
+                  </p>
+                </div>
+              </div>
+
+              <div class="methodology-note">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>All formulas assume end-of-month contributions and monthly compounding intervals. Taxes, fees, and transaction costs are excluded.</span>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <!-- Assumptions & Educational Disclaimer -->
+        <section class="disclaimer-section" aria-labelledby="disclaimer-title">
+          <div class="disclaimer-card">
+            <div class="disclaimer-header">
+              <div class="disclaimer-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                  <line x1="12" y1="9" x2="12" y2="13"></line>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+              </div>
+              <h2 id="disclaimer-title" class="disclaimer-heading">Assumptions &amp; educational disclaimer</h2>
+            </div>
+            
+            <div class="disclaimer-body">
+              <p class="disclaimer-text">
+                This calculator is for educational and illustrative purposes only. It is not financial, investment, tax or legal advice and does not recommend any investment product or strategy.
+              </p>
+              <p class="disclaimer-text">
+                Future values are estimates based on the assumptions entered. Actual inflation, investment returns and future costs may differ materially.
+              </p>
+              <p class="disclaimer-text">
+                The assumed investment return is not guaranteed.
+              </p>
+              <p class="disclaimer-text">
+                Calculations use annual rates divided by 12 to derive monthly rates and monthly compounding for the contribution calculation.
+              </p>
+              <p class="disclaimer-text">
+                Monthly contributions are assumed to be made at the end of each month.
+              </p>
+              <p class="disclaimer-text">
+                Taxes, fees, transaction costs and changes in contribution amounts are not included.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">GoalBridge</span>
+        <span class="footer-tagline">Empowering first-time earners with educational clarity.</span>
+      </div>
+      <p class="footer-copy">
+        &copy; 2026 GoalBridge. Built for independent planning. No registration required &bull; No cookies &bull; No personal data collected.
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
