@@ -107,8 +107,8 @@ const GOAL_LIBRARY = Object.freeze([
    0. Goal Library State & Controller
    ========================================================================== */
 
-let currentActiveCategory = 'education-career';
-let currentSelectedGoalId = 'higher-education';
+let currentActiveCategory = 'financial-foundation';
+let currentSelectedGoalId = null;
 
 /**
  * Finds a goal and its category in GOAL_LIBRARY by goal ID
@@ -754,6 +754,128 @@ function renderResults(results, inputs) {
   }
 }
 
+/**
+ * Renders neutral/empty results state across the scenario dashboard.
+ * Used on initial page load and when the Reset button is pressed.
+ */
+function renderNeutralState() {
+  if (typeof document === 'undefined') return;
+
+  const displayGoalBadge = document.getElementById('displayGoalBadge');
+  if (displayGoalBadge) displayGoalBadge.textContent = 'No goal selected';
+
+  const monthlyContributionVal = document.getElementById('monthlyContributionVal');
+  if (monthlyContributionVal) monthlyContributionVal.textContent = '₹0';
+
+  const prominentSubtext = document.getElementById('prominentSubtext');
+  if (prominentSubtext) {
+    prominentSubtext.textContent = 'Choose an illustrative goal or enter your assumptions to calculate your monthly contribution.';
+  }
+
+  const prominentAnnotation = document.getElementById('prominentAnnotation');
+  if (prominentAnnotation) prominentAnnotation.textContent = 'Awaiting scenario';
+
+  const futureGoalCostVal = document.getElementById('futureGoalCostVal');
+  if (futureGoalCostVal) futureGoalCostVal.textContent = '₹0';
+
+  const futureGoalCostExpl = document.getElementById('futureGoalCostExpl');
+  if (futureGoalCostExpl) {
+    futureGoalCostExpl.textContent = 'Future goal cost will appear here after entering assumptions.';
+  }
+
+  const projectedSavingsVal = document.getElementById('projectedSavingsVal');
+  if (projectedSavingsVal) projectedSavingsVal.textContent = '₹0';
+
+  const projectedSavingsExpl = document.getElementById('projectedSavingsExpl');
+  if (projectedSavingsExpl) {
+    projectedSavingsExpl.textContent = 'Projected future value of current savings will appear here.';
+  }
+
+  const fundingGapVal = document.getElementById('fundingGapVal');
+  if (fundingGapVal) fundingGapVal.textContent = '₹0';
+
+  const fundingGapExpl = document.getElementById('fundingGapExpl');
+  if (fundingGapExpl) {
+    fundingGapExpl.textContent = 'Remaining funding requirement after current savings.';
+  }
+
+  const totalContributionsVal = document.getElementById('totalContributionsVal');
+  if (totalContributionsVal) totalContributionsVal.textContent = '₹0';
+
+  const totalContributionsSubnote = document.getElementById('totalContributionsSubnote');
+  if (totalContributionsSubnote) totalContributionsSubnote.textContent = '(0 monthly installments)';
+
+  const totalContributionsDesc = document.getElementById('totalContributionsDesc');
+  if (totalContributionsDesc) {
+    totalContributionsDesc.textContent = 'Total cumulative out-of-pocket amount contributed.';
+  }
+
+  const projectedGrowthVal = document.getElementById('projectedGrowthVal');
+  if (projectedGrowthVal) projectedGrowthVal.textContent = '₹0';
+
+  const projectedGrowthSubnote = document.getElementById('projectedGrowthSubnote');
+  if (projectedGrowthSubnote) projectedGrowthSubnote.textContent = '(From compounding)';
+
+  const projectedGrowthDesc = document.getElementById('projectedGrowthDesc');
+  if (projectedGrowthDesc) {
+    projectedGrowthDesc.textContent = 'Illustrative projected growth based on the assumed return.';
+  }
+
+  // Visual Comparison Bars reset to 0%
+  const vizCostCompact = document.getElementById('vizCostCompact');
+  if (vizCostCompact) vizCostCompact.textContent = '₹0';
+  const vizCostPrecise = document.getElementById('vizCostPrecise');
+  if (vizCostPrecise) vizCostPrecise.textContent = '(₹0)';
+  const vizBarCost = document.getElementById('vizBarCost');
+  if (vizBarCost) vizBarCost.style.width = '0%';
+  const vizCostTrack = document.getElementById('vizCostTrack');
+  if (vizCostTrack) {
+    vizCostTrack.setAttribute('aria-valuenow', '0');
+    vizCostTrack.setAttribute('aria-valuemax', '100');
+    vizCostTrack.setAttribute('aria-valuetext', '₹0');
+  }
+
+  const vizSavingsCompact = document.getElementById('vizSavingsCompact');
+  if (vizSavingsCompact) vizSavingsCompact.textContent = '₹0';
+  const vizSavingsPrecise = document.getElementById('vizSavingsPrecise');
+  if (vizSavingsPrecise) vizSavingsPrecise.textContent = '(₹0)';
+  const vizBarSavings = document.getElementById('vizBarSavings');
+  if (vizBarSavings) vizBarSavings.style.width = '0%';
+  const vizSavingsTrack = document.getElementById('vizSavingsTrack');
+  if (vizSavingsTrack) {
+    vizSavingsTrack.setAttribute('aria-valuenow', '0');
+    vizSavingsTrack.setAttribute('aria-valuemax', '100');
+    vizSavingsTrack.setAttribute('aria-valuetext', '₹0');
+  }
+
+  const vizGapCompact = document.getElementById('vizGapCompact');
+  if (vizGapCompact) vizGapCompact.textContent = '₹0';
+  const vizGapPrecise = document.getElementById('vizGapPrecise');
+  if (vizGapPrecise) vizGapPrecise.textContent = '(₹0)';
+  const vizBarGap = document.getElementById('vizBarGap');
+  if (vizBarGap) vizBarGap.style.width = '0%';
+  const vizGapTrack = document.getElementById('vizGapTrack');
+  if (vizGapTrack) {
+    vizGapTrack.setAttribute('aria-valuenow', '0');
+    vizGapTrack.setAttribute('aria-valuemax', '100');
+    vizGapTrack.setAttribute('aria-valuetext', '₹0');
+  }
+
+  // Narrative summary reset
+  const summaryPara1 = document.getElementById('summaryPara1');
+  if (summaryPara1) {
+    summaryPara1.textContent = 'Select an illustrative goal from the library above or enter your goal details to explore your scenario.';
+  }
+  const summaryPara2 = document.getElementById('summaryPara2');
+  if (summaryPara2) summaryPara2.textContent = '';
+  const summaryPara3 = document.getElementById('summaryPara3');
+  if (summaryPara3) summaryPara3.textContent = '';
+  const summaryPara4 = document.getElementById('summaryPara4');
+  if (summaryPara4) {
+    summaryPara4.textContent = 'These are scenario estimates for educational planning. Actual inflation, investment returns and future costs may differ.';
+  }
+}
+
 /* ==========================================================================
    3. Accessible Inline Error & Caution UI Helpers
    ========================================================================== */
@@ -1082,8 +1204,35 @@ function validateInputs() {
  * Prevents calculation until all required errors are resolved
  */
 function handleCalculate(shouldScroll = false) {
+  const goalNameEl = document.getElementById('goalName');
+  const goalCostEl = document.getElementById('goalCostToday');
+  const targetYearsEl = document.getElementById('targetYears');
+
+  const nameVal = (goalNameEl?.value || '').trim();
+  const costVal = (goalCostEl?.value || '').trim();
+  const yearsVal = (targetYearsEl?.value || '').trim();
+
+  const isBlankScenario = !nameVal && (!costVal || costVal === '0') && (!yearsVal || yearsVal === '0');
+
   const validation = validateInputs();
   if (!validation.isValid) {
+    const statusMessage = document.getElementById('statusMessage');
+    if (statusMessage) {
+      if (isBlankScenario) {
+        statusMessage.textContent = 'Please choose a goal or enter your goal details to see your scenario.';
+      } else {
+        const errorCount = Object.keys(validation.errors).length;
+        statusMessage.textContent = `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. Please review the highlighted fields to calculate.`;
+      }
+    }
+
+    const monthlyContributionVal = document.getElementById('monthlyContributionVal');
+    if (monthlyContributionVal && monthlyContributionVal.textContent === '₹0') {
+      const summaryPara1 = document.getElementById('summaryPara1');
+      if (summaryPara1) {
+        summaryPara1.textContent = 'Please choose a goal or enter your goal details to see your scenario.';
+      }
+    }
     return;
   }
 
@@ -1100,7 +1249,8 @@ function handleCalculate(shouldScroll = false) {
 }
 
 /**
- * Resets the scenario builder to original demonstration values and recalculates
+ * Resets the scenario builder to clean empty/zero state and clears results.
+ * Does not restore demonstration values.
  */
 function handleReset() {
   const fields = ['goalName', 'goalCostToday', 'targetYears', 'inflationRate', 'investmentReturn', 'currentSavings'];
@@ -1111,41 +1261,38 @@ function handleReset() {
     clearFieldCaution(fieldId);
   });
 
-  // Restore demonstration values
-  document.getElementById('goalName').value = DEFAULTS.goalName;
-  document.getElementById('goalCostToday').value = DEFAULTS.goalCostToday;
-  document.getElementById('targetYears').value = DEFAULTS.targetYears;
-  document.getElementById('inflationRate').value = DEFAULTS.inflationRate;
-  document.getElementById('investmentReturn').value = DEFAULTS.investmentReturn;
-  document.getElementById('currentSavings').value = DEFAULTS.currentSavings;
-
-  // Restore Goal Library selection to Higher Education Fund in Education & Career
-  currentActiveCategory = 'education-career';
-  currentSelectedGoalId = 'higher-education';
-  renderGoalLibrary(currentActiveCategory, currentSelectedGoalId);
-
-  // Update live header badge
-  const displayGoalBadge = document.getElementById('displayGoalBadge');
-  if (displayGoalBadge) {
-    displayGoalBadge.textContent = `${DEFAULTS.goalName} (${DEFAULTS.targetYears} Yrs)`;
+  // Clear all 6 inputs to blank / 0
+  const goalNameEl = document.getElementById('goalName');
+  if (goalNameEl) {
+    goalNameEl.value = '';
+    goalNameEl.placeholder = 'e.g., Higher Education Fund, Home Down Payment';
   }
 
-  // Calculate and re-render demonstration scenario
-  const defaultValues = {
-    goalName: DEFAULTS.goalName,
-    costToday: DEFAULTS.goalCostToday,
-    years: DEFAULTS.targetYears,
-    inflationRate: DEFAULTS.inflationRate,
-    annualReturn: DEFAULTS.investmentReturn,
-    currentSavings: DEFAULTS.currentSavings
-  };
+  const costEl = document.getElementById('goalCostToday');
+  if (costEl) costEl.value = '';
 
-  const results = calculateScenario(defaultValues);
-  renderResults(results, defaultValues);
+  const yearsEl = document.getElementById('targetYears');
+  if (yearsEl) yearsEl.value = '';
+
+  const infEl = document.getElementById('inflationRate');
+  if (infEl) infEl.value = '';
+
+  const retEl = document.getElementById('investmentReturn');
+  if (retEl) retEl.value = '';
+
+  const savEl = document.getElementById('currentSavings');
+  if (savEl) savEl.value = '0';
+
+  // Deselect any selected goal card in the library
+  currentSelectedGoalId = null;
+  renderGoalLibrary(currentActiveCategory, null);
+
+  // Render neutral results state across all metric cards, comparison bars, badge and summary
+  renderNeutralState();
 
   const statusMessage = document.getElementById('statusMessage');
   if (statusMessage) {
-    statusMessage.textContent = 'Scenario has been reset to the original demonstration values.';
+    statusMessage.textContent = 'Scenario has been reset. Choose an illustrative goal or enter your own assumptions to begin.';
   }
 }
 
@@ -1165,7 +1312,7 @@ function initGoalBridge() {
 
   const fields = ['goalName', 'goalCostToday', 'targetYears', 'inflationRate', 'investmentReturn', 'currentSavings'];
 
-  // Initialize Goal Library rendering
+  // Initialize Goal Library rendering (no card selected initially)
   renderGoalLibrary(currentActiveCategory, currentSelectedGoalId);
 
   // Prevent form submission reload and run calculation
@@ -1196,10 +1343,14 @@ function initGoalBridge() {
 
   // Live Scenario Header Badge Update on typing
   function updateLiveBadge() {
-    const name = goalNameInput ? goalNameInput.value.trim() || 'Custom Goal' : 'Custom Goal';
-    const years = targetYearsInput ? targetYearsInput.value || 0 : 0;
+    const name = goalNameInput ? goalNameInput.value.trim() : '';
+    const years = targetYearsInput ? targetYearsInput.value : '';
     if (displayGoalBadge) {
-      displayGoalBadge.textContent = `${name} (${years} Yrs)`;
+      if (!name && !years) {
+        displayGoalBadge.textContent = 'No goal selected';
+      } else {
+        displayGoalBadge.textContent = `${name || 'Custom Goal'}${years ? ` (${years} Yrs)` : ''}`;
+      }
     }
   }
 
@@ -1231,8 +1382,8 @@ function initGoalBridge() {
     });
   });
 
-  // Initial calculation run on page load to dynamically compute demonstration results
-  handleCalculate(false);
+  // Initialize to neutral empty state on initial page load
+  renderNeutralState();
 }
 
 if (typeof document !== 'undefined') {
@@ -1254,6 +1405,7 @@ const EXPORTS = {
   findGoalById,
   renderGoalLibrary,
   selectGoal,
+  renderNeutralState,
   calculateFutureGoalValue,
   calculateFutureSavingsValue,
   calculateFundingGap,

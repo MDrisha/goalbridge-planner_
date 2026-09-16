@@ -48,6 +48,22 @@
       </div>
     </section>
 
+    <!-- Compact Introduction Section for First-Time Visitors (Change 1) -->
+    <section class="intro-section" aria-labelledby="intro-title">
+      <div class="intro-card">
+        <h2 id="intro-title" class="intro-heading">Plan today for the goals you care about tomorrow</h2>
+        <p class="intro-desc">
+          GoalBridge helps you estimate what your future goals might actually cost after inflation, see how much your existing savings could grow, and calculate the monthly contribution that could bridge the gap.
+        </p>
+        <p class="intro-supporting">
+          Explore illustrative life goals or enter your own numbers to model your scenario.
+        </p>
+        <p class="intro-note">
+          Educational planning tool &middot; Not investment advice
+        </p>
+      </div>
+    </section>
+
     <!-- Two-Column Application Layout -->
     <div class="app-layout">
 
@@ -57,6 +73,10 @@
           <div class="card-header">
             <h2 id="builder-title" class="card-title">Build your scenario</h2>
             <p class="card-subtitle">Adjust your assumptions to explore different planning paths.</p>
+            <p class="input-clarification-note" role="note">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <span>You can edit any of these values to match your own goal and assumptions.</span>
+            </p>
           </div>
 
           <form id="scenarioForm" class="scenario-form" novalidate>
@@ -69,6 +89,14 @@
               <span class="input-hint" id="goalPlanningHint">
                 Choose from the goal library or create your own custom goal.
               </span>
+
+              <!-- Illustrative Examples Callout (Change 6) -->
+              <div class="goal-library-illustrative-callout" role="note" aria-label="Illustrative Examples Note">
+                <span class="callout-badge"><span aria-hidden="true">💡</span> Illustrative examples</span>
+                <p class="callout-text">
+                  The amounts, timeframes and inflation assumptions shown for these goals are examples only. Your actual goal may be different. You can edit the values after selecting a goal or create your own.
+                </p>
+              </div>
 
               <!-- Goal Library Component -->
               <div class="goal-library-container" id="goalLibraryContainer" role="region" aria-labelledby="goalPlanningLabel">
@@ -91,8 +119,8 @@
                   id="goalName" 
                   name="goalName" 
                   class="form-input text-input" 
-                  value="Higher Education Fund" 
-                  placeholder="e.g., Higher Education Fund" 
+                  value="" 
+                  placeholder="e.g., Higher Education Fund or choose above" 
                   required
                   aria-describedby="goalNameHint"
                 >
@@ -112,17 +140,17 @@
                   id="goalCostToday" 
                   name="goalCostToday" 
                   class="form-input affix-input" 
-                  value="1200000" 
+                  value="" 
                   min="1" 
                   step="any" 
-                  placeholder="12,00,000" 
+                  placeholder="0" 
                   required
                   aria-label="How much would this goal cost today in Indian Rupees"
                   aria-describedby="goalCostHint"
                 >
                 <span class="input-suffix currency-tag" aria-hidden="true">INR</span>
               </div>
-              <span id="goalCostHint" class="input-hint">Current cost in today's money (₹12,00,000).</span>
+              <span id="goalCostHint" class="input-hint">Current cost in today's money (e.g. ₹5,00,000).</span>
             </div>
 
             <!-- 3. How many years until the goal? -->
@@ -136,11 +164,11 @@
                   id="targetYears" 
                   name="targetYears" 
                   class="form-input affix-input-left" 
-                  value="8" 
+                  value="" 
                   min="1" 
                   max="100" 
                   step="1" 
-                  placeholder="8" 
+                  placeholder="0" 
                   required
                   aria-describedby="targetYearsHint"
                 >
@@ -160,11 +188,11 @@
                   id="inflationRate" 
                   name="inflationRate" 
                   class="form-input affix-input-left" 
-                  value="6" 
+                  value="" 
                   min="0" 
                   max="50" 
                   step="any" 
-                  placeholder="6" 
+                  placeholder="0" 
                   required
                   aria-describedby="inflationRateHint"
                 >
@@ -184,11 +212,11 @@
                   id="investmentReturn" 
                   name="investmentReturn" 
                   class="form-input affix-input-left" 
-                  value="10" 
+                  value="" 
                   min="0" 
                   max="100" 
                   step="any" 
-                  placeholder="10" 
+                  placeholder="0" 
                   required
                   aria-describedby="investmentReturnHint"
                 >
@@ -209,10 +237,10 @@
                   id="currentSavings" 
                   name="currentSavings" 
                   class="form-input affix-input" 
-                  value="150000" 
+                  value="0" 
                   min="0" 
                   step="any" 
-                  placeholder="1,50,000" 
+                  placeholder="0" 
                   required
                   aria-label="How much have you already saved for this goal in Indian Rupees"
                   aria-describedby="currentSavingsHint"
@@ -254,7 +282,7 @@
             <span class="section-eyebrow">Scenario Projection</span>
             <h2 id="results-title" class="section-title">Your scenario</h2>
           </div>
-          <span class="scenario-target-badge" id="displayGoalBadge">Higher Education Fund (8 Yrs)</span>
+          <span class="scenario-target-badge" id="displayGoalBadge">No goal selected</span>
         </div>
 
         <!-- Prominent Monthly Contribution Card -->
@@ -263,14 +291,14 @@
             <div class="prominent-label-wrap">
               <span class="prominent-tag">Primary Planning Output</span>
               <h3 id="monthly-contrib-label" class="prominent-label">Estimated monthly contribution</h3>
-              <p class="prominent-subtext" id="prominentSubtext">Illustrative estimate based on the assumptions entered.</p>
+              <p class="prominent-subtext" id="prominentSubtext">Choose an illustrative goal or enter your assumptions to calculate your monthly contribution.</p>
             </div>
             <div class="prominent-value-box">
               <div class="prominent-metric">
-                <span class="metric-value prominent-value" id="monthlyContributionVal">₹10,808</span>
+                <span class="metric-value prominent-value" id="monthlyContributionVal">₹0</span>
                 <span class="metric-unit prominent-unit">/ month</span>
               </div>
-              <span class="prominent-annotation" id="prominentAnnotation">Illustrative scenario estimate</span>
+              <span class="prominent-annotation" id="prominentAnnotation">Awaiting scenario</span>
             </div>
           </div>
         </div>
@@ -290,8 +318,8 @@
               <span class="metric-status-tag">Inflation Adjusted</span>
             </div>
             <h3 class="metric-label">Estimated goal cost at target date</h3>
-            <p class="metric-value" id="futureGoalCostVal">₹19,12,618</p>
-            <p class="metric-explanation" id="futureGoalCostExpl">Today's ₹12,00,000 adjusted for 6% annual inflation over 8 years.</p>
+            <p class="metric-value" id="futureGoalCostVal">₹0</p>
+            <p class="metric-explanation" id="futureGoalCostExpl">Future goal cost will appear here after entering assumptions.</p>
           </div>
 
           <!-- Metric 2: Current Savings Projected Value -->
@@ -305,8 +333,8 @@
               <span class="metric-status-tag">Compounded</span>
             </div>
             <h3 class="metric-label">Current savings projected value</h3>
-            <p class="metric-value" id="projectedSavingsVal">₹3,32,726</p>
-            <p class="metric-explanation" id="projectedSavingsExpl">Existing ₹1,50,000 with an illustrative projected value of ₹3,32,726 at an assumed 10% annual return over 8 years.</p>
+            <p class="metric-value" id="projectedSavingsVal">₹0</p>
+            <p class="metric-explanation" id="projectedSavingsExpl">Projected future value of current savings will appear here.</p>
           </div>
 
           <!-- Metric 3: Estimated Funding Gap -->
@@ -322,8 +350,8 @@
               <span class="metric-status-tag gap-tag">Net Remaining</span>
             </div>
             <h3 class="metric-label">Estimated funding gap</h3>
-            <p class="metric-value text-gap" id="fundingGapVal">₹15,79,891</p>
-            <p class="metric-explanation" id="fundingGapExpl">Target cost minus the projected future value of current savings.</p>
+            <p class="metric-value text-gap" id="fundingGapVal">₹0</p>
+            <p class="metric-explanation" id="fundingGapExpl">Remaining funding requirement after current savings.</p>
           </div>
 
         </div>
@@ -336,10 +364,10 @@
             <div class="additional-item">
               <span class="additional-label">Total contributions over the remaining period</span>
               <div class="additional-val-row">
-                <span class="additional-value" id="totalContributionsVal">₹10,37,546</span>
-                <span class="additional-subnote" id="totalContributionsSubnote">(96 monthly installments)</span>
+                <span class="additional-value" id="totalContributionsVal">₹0</span>
+                <span class="additional-subnote" id="totalContributionsSubnote">(0 monthly installments)</span>
               </div>
-              <p class="additional-desc" id="totalContributionsDesc">Total cumulative out-of-pocket amount contributed across 8 years.</p>
+              <p class="additional-desc" id="totalContributionsDesc">Total cumulative out-of-pocket amount contributed.</p>
             </div>
 
             <div class="additional-divider" aria-hidden="true"></div>
@@ -347,7 +375,7 @@
             <div class="additional-item">
               <span class="additional-label">Illustrative projected growth</span>
               <div class="additional-val-row">
-                <span class="additional-value text-growth" id="projectedGrowthVal">₹5,42,345</span>
+                <span class="additional-value text-growth" id="projectedGrowthVal">₹0</span>
                 <span class="additional-subnote" id="projectedGrowthSubnote">(From compounding)</span>
               </div>
               <p class="additional-desc" id="projectedGrowthDesc">Illustrative projected growth based on the assumed return.</p>
@@ -377,12 +405,12 @@
                   Estimated goal cost at target date
                 </span>
                 <span class="comparison-values">
-                  <strong class="comparison-compact" id="vizCostCompact">₹19.13L</strong>
-                  <span class="comparison-precise" id="vizCostPrecise">(₹19,12,618)</span>
+                  <strong class="comparison-compact" id="vizCostCompact">₹0</strong>
+                  <span class="comparison-precise" id="vizCostPrecise">(₹0)</span>
                 </span>
               </div>
-              <div class="comparison-track" id="vizCostTrack" role="progressbar" aria-label="Estimated goal cost at target date" aria-valuemin="0" aria-valuemax="1912618" aria-valuenow="1912618" aria-valuetext="₹19,12,618">
-                <div class="comparison-bar-fill bar-cost" id="vizBarCost" style="width: 100%;"></div>
+              <div class="comparison-track" id="vizCostTrack" role="progressbar" aria-label="Estimated goal cost at target date" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="₹0">
+                <div class="comparison-bar-fill bar-cost" id="vizBarCost" style="width: 0%;"></div>
               </div>
             </div>
 
@@ -394,12 +422,12 @@
                   Projected future value of current savings
                 </span>
                 <span class="comparison-values">
-                  <strong class="comparison-compact" id="vizSavingsCompact">₹3.33L</strong>
-                  <span class="comparison-precise" id="vizSavingsPrecise">(₹3,32,726)</span>
+                  <strong class="comparison-compact" id="vizSavingsCompact">₹0</strong>
+                  <span class="comparison-precise" id="vizSavingsPrecise">(₹0)</span>
                 </span>
               </div>
-              <div class="comparison-track" id="vizSavingsTrack" role="progressbar" aria-label="Projected future value of current savings" aria-valuemin="0" aria-valuemax="1912618" aria-valuenow="332726" aria-valuetext="₹3,32,726">
-                <div class="comparison-bar-fill bar-savings" id="vizBarSavings" style="width: 17.4%;"></div>
+              <div class="comparison-track" id="vizSavingsTrack" role="progressbar" aria-label="Projected future value of current savings" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="₹0">
+                <div class="comparison-bar-fill bar-savings" id="vizBarSavings" style="width: 0%;"></div>
               </div>
             </div>
 
@@ -411,12 +439,12 @@
                   Estimated funding gap
                 </span>
                 <span class="comparison-values">
-                  <strong class="comparison-compact" id="vizGapCompact">₹15.8L</strong>
-                  <span class="comparison-precise" id="vizGapPrecise">(₹15,79,891)</span>
+                  <strong class="comparison-compact" id="vizGapCompact">₹0</strong>
+                  <span class="comparison-precise" id="vizGapPrecise">(₹0)</span>
                 </span>
               </div>
-              <div class="comparison-track" id="vizGapTrack" role="progressbar" aria-label="Estimated funding gap" aria-valuemin="0" aria-valuemax="1912618" aria-valuenow="1579891" aria-valuetext="₹15,79,891">
-                <div class="comparison-bar-fill bar-gap" id="vizBarGap" style="width: 82.6%;"></div>
+              <div class="comparison-track" id="vizGapTrack" role="progressbar" aria-label="Estimated funding gap" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="₹0">
+                <div class="comparison-bar-fill bar-gap" id="vizBarGap" style="width: 0%;"></div>
               </div>
             </div>
 
@@ -439,10 +467,10 @@
             <h3 id="summary-title" class="summary-title">What this scenario means</h3>
           </div>
           <div class="summary-body" id="summaryBody">
-            <p id="summaryPara1"></p>
+            <p id="summaryPara1">Select an illustrative goal from the library above or enter your goal details to explore your scenario.</p>
             <p id="summaryPara2"></p>
             <p id="summaryPara3"></p>
-            <p id="summaryPara4" class="summary-disclaimer-note"></p>
+            <p id="summaryPara4" class="summary-disclaimer-note">These are scenario estimates for educational planning. Actual inflation, investment returns and future costs may differ.</p>
             <div class="summary-takeaway">
               <span class="takeaway-label">Key takeaway:</span>
               <span>A longer planning timeline provides more compounding intervals, which can reduce the illustrative monthly contribution.</span>
