@@ -1801,3 +1801,1184 @@ input[type=number] {
   }
 }
 
+/* --------------------------------------------------------------------------
+   17. Advanced Disclosure (Step-Up Contribution)
+   -------------------------------------------------------------------------- */
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.advanced-accordion {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-card-bg);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.advanced-accordion[open] {
+  border-color: var(--color-primary-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.advanced-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  background-color: var(--color-card-subtle);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  transition: background-color 0.15s ease;
+}
+
+.advanced-summary::-webkit-details-marker {
+  display: none;
+}
+
+.advanced-summary:hover {
+  background-color: #E2E8F0;
+}
+
+.advanced-summary:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.advanced-summary-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.advanced-accordion .summary-caret {
+  transition: transform 0.2s ease;
+  color: var(--color-text-subtle);
+}
+
+.advanced-accordion[open] .summary-caret {
+  transform: rotate(180deg);
+}
+
+.advanced-badge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background-color: #E2E8F0;
+  color: var(--color-text-muted);
+}
+
+.advanced-content {
+  padding: 1.25rem 1rem 1rem;
+  border-top: 1px solid var(--color-border);
+  background-color: #FAFAFA;
+}
+
+/* --------------------------------------------------------------------------
+   18. Scenario Export & Print Actions (Header)
+   -------------------------------------------------------------------------- */
+.results-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.results-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-action-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--color-text-muted);
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-action-outline:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+}
+
+.btn-action-outline:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   19. Accessible Dynamic Chart Mode Toggles & Summary
+   -------------------------------------------------------------------------- */
+.viz-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.viz-mode-toggle {
+  display: inline-flex;
+  background-color: var(--color-card-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 2px;
+}
+
+.viz-toggle-btn {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.viz-toggle-btn.is-active {
+  background-color: var(--color-card-bg);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.viz-toggle-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.viz-accessible-summary {
+  margin-top: 0.85rem;
+  margin-bottom: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  background-color: var(--color-primary-soft);
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: #0F534C;
+  font-weight: 500;
+}
+
+/* Comparison Bar Fill Colors */
+.bullet-conservative,
+.bar-conservative {
+  background-color: #64748B;
+}
+
+.bullet-base,
+.bar-base {
+  background-color: var(--color-primary);
+}
+
+.bullet-optimistic,
+.bar-optimistic {
+  background-color: #059669;
+}
+
+/* --------------------------------------------------------------------------
+   20. User-Oriented Scenarios & Scenario Comparison
+   -------------------------------------------------------------------------- */
+
+/* Scenario Edit & Alternate Banner */
+.scenario-edit-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: #FEF3C7;
+  border: 1px solid #F59E0B;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.scenario-edit-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.scenario-edit-banner-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #FDE68A;
+  color: #B45309;
+  flex-shrink: 0;
+}
+
+.scenario-edit-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.scenario-edit-banner-text strong {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #92400E;
+}
+
+.scenario-edit-banner-text span {
+  font-size: 0.8125rem;
+  color: #78350F;
+  line-height: 1.35;
+}
+
+.btn-scenario-banner-cancel {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #78350F;
+  background-color: #FFFFFF;
+  border: 1px solid #D97706;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.btn-scenario-banner-cancel:hover {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+.btn-scenario-banner-cancel:focus-visible {
+  outline: 2px solid #B45309;
+  outline-offset: 2px;
+}
+
+/* Scenario Action Bar (Below Prominent Monthly Card) */
+.scenario-action-bar-card {
+  padding: 1rem 1.25rem;
+  margin-top: 0.85rem;
+  margin-bottom: 0.85rem;
+  background-color: var(--color-card-subtle);
+  border: 1px solid var(--color-border);
+}
+
+.scenario-action-btns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-save-scenario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.15rem;
+  min-height: 44px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #FFFFFF;
+  background-color: var(--color-primary);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.btn-save-scenario:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-save-scenario:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.btn-alternate-scenario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.15rem;
+  min-height: 44px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--color-primary);
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-alternate-scenario:hover {
+  background-color: var(--color-primary-soft);
+}
+
+.btn-alternate-scenario:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Inline Scenario Name Popover */
+.save-scenario-inline {
+  margin-top: 0.85rem;
+  padding: 0.85rem;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.save-scenario-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 0.4rem;
+}
+
+.save-scenario-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.save-scenario-inputs .form-input {
+  flex: 1 1 200px;
+  min-height: 40px;
+}
+
+.btn-sm {
+  padding: 0.5rem 0.85rem;
+  font-size: 0.8125rem;
+  min-height: 40px;
+}
+
+/* Saved Scenarios Section */
+.saved-scenarios-card {
+  margin-top: 1.5rem;
+}
+
+.saved-scenarios-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.saved-scenarios-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-top: 0.15rem;
+}
+
+.saved-scenarios-subhead {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+.saved-scenarios-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.privacy-pill-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #065F46;
+  background-color: #D1FAE5;
+  border: 1px solid #A7F3D0;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+}
+
+.saved-scenarios-count {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+  border: 1px solid var(--color-primary-border);
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-pill);
+}
+
+.saved-scenarios-empty {
+  text-align: center;
+  padding: 2.25rem 1.5rem;
+  background-color: var(--color-card-subtle);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.saved-scenarios-empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.saved-scenarios-empty-text {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 0.25rem;
+}
+
+.saved-scenarios-empty-hint {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  max-width: 440px;
+  margin: 0 auto;
+  line-height: 1.45;
+}
+
+/* Saved Scenario Item Card */
+.saved-scenarios-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.saved-scenario-item {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.saved-scenario-item:hover {
+  border-color: var(--color-primary-border);
+  box-shadow: var(--shadow-md);
+}
+
+.saved-scenario-item-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.saved-scenario-name-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.saved-scenario-item-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.saved-scenario-tag {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background-color: var(--color-card-subtle);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.saved-scenario-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.btn-scenario-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.65rem;
+  min-height: 36px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--color-text-muted);
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-scenario-action:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+}
+
+.btn-scenario-action.btn-delete:hover {
+  color: #DC2626;
+  border-color: #FCA5A5;
+  background-color: #FEE2E2;
+}
+
+.btn-scenario-action:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.btn-scenario-action.btn-delete:focus-visible {
+  outline: 2px solid #DC2626;
+  outline-offset: 2px;
+}
+
+.saved-scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .saved-scenario-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.saved-scenario-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.saved-scenario-cell-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.saved-scenario-cell-val {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  font-family: var(--font-mono);
+}
+
+.saved-scenario-highlight-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  background-color: var(--color-primary-soft);
+  border: 1px solid var(--color-primary-border);
+  border-radius: var(--radius-sm);
+}
+
+.saved-scenario-highlight-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.saved-scenario-highlight-val {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  font-family: var(--font-mono);
+}
+
+/* Compare Your Scenarios Section */
+.scenario-comparison-card {
+  margin-top: 1.5rem;
+}
+
+.comparison-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.comparison-card-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-top: 0.15rem;
+}
+
+.comparison-card-subhead {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+.comparison-card-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+  border: 1px solid var(--color-primary-border);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  flex-shrink: 0;
+}
+
+/* Comparison Table (Desktop & Tablet) */
+.user-comparison-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.user-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  text-align: left;
+}
+
+.user-comparison-table th,
+.user-comparison-table td {
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.user-comparison-table thead th {
+  background-color: var(--color-card-subtle);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.user-comparison-table thead th:first-child {
+  position: sticky;
+  left: 0;
+  background-color: var(--color-card-subtle);
+  z-index: 2;
+  min-width: 160px;
+}
+
+.user-comparison-table tbody td:first-child {
+  position: sticky;
+  left: 0;
+  background-color: #FFFFFF;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  z-index: 1;
+  border-right: 1px solid var(--color-border);
+}
+
+.user-comparison-table tbody tr:nth-child(even) td {
+  background-color: #F8FAFC;
+}
+
+.user-comparison-table tbody tr:nth-child(even) td:first-child {
+  background-color: #F8FAFC;
+}
+
+.user-comparison-table tbody tr.row-highlight td {
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  border-top: 1px solid var(--color-primary-border);
+  border-bottom: 1px solid var(--color-primary-border);
+}
+
+.user-comparison-table tbody tr.row-section-header td {
+  background-color: #F1F5F9;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+/* Comparison Narrative Summary */
+.comparison-narrative {
+  padding: 0.85rem 1rem;
+  background-color: var(--color-card-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+}
+
+.comparison-narrative-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  color: var(--color-text-main);
+  line-height: 1.45;
+}
+
+.comparison-note {
+  font-size: 0.75rem;
+  color: var(--color-text-subtle);
+  line-height: 1.45;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Dynamic Scenario Palette Bullets & Bars */
+.color-variant-0 { background-color: #0F766E; }
+.color-variant-1 { background-color: #2563EB; }
+.color-variant-2 { background-color: #D97706; }
+.color-variant-3 { background-color: #7C3AED; }
+.color-variant-4 { background-color: #059669; }
+.color-variant-5 { background-color: #DC2626; }
+
+/* --------------------------------------------------------------------------
+/* ==========================================================================
+   21. Dedicated Clean Report Stylesheet (@media print & screen isolation)
+   ========================================================================== */
+
+/* Screen Isolation: #printReport is completely hidden during normal browsing */
+#printReport {
+  display: none !important;
+}
+
+@media print {
+  /* Hide the ENTIRE normal interactive web application interface */
+  .site-header,
+  main,
+  .site-footer,
+  #scenarioEditBanner,
+  .form-actions,
+  button,
+  .modal,
+  .popover,
+  .card-actions,
+  .app-layout,
+  .hero-section,
+  .intro-section,
+  .results-header-actions,
+  .viz-mode-toggle {
+    display: none !important;
+  }
+
+  /* Display the dedicated clean report container */
+  #printReport {
+    display: block !important;
+    background-color: #FFFFFF !important;
+    color: #111827 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 10pt !important;
+    line-height: 1.45 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  @page {
+    margin: 12mm 15mm 12mm 15mm;
+    size: A4 portrait;
+  }
+
+  /* 2. REPORT HEADER */
+  .print-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .print-brand-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 0.5rem;
+  }
+
+  .print-brand-title {
+    font-size: 18pt;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #0F766E !important;
+    margin: 0 0 0.15rem 0;
+  }
+
+  .print-brand-subtitle {
+    font-size: 9.5pt;
+    font-weight: 500;
+    color: #4B5563 !important;
+    margin: 0;
+  }
+
+  .print-meta-box {
+    text-align: right;
+  }
+
+  .print-report-type {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #111827 !important;
+    margin: 0 0 0.15rem 0;
+  }
+
+  .print-date {
+    font-size: 8.5pt;
+    color: #6B7280 !important;
+    margin: 0;
+  }
+
+  .print-divider {
+    height: 2px;
+    background-color: #0F766E !important;
+    width: 100%;
+    margin-top: 0.35rem;
+  }
+
+  /* NEUTRAL NOTICE (When printed prior to calculation) */
+  .print-neutral-notice {
+    padding: 1.75rem;
+    border: 1px solid #D1D5DB !important;
+    border-radius: 4px;
+    background-color: #F9FAFB !important;
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .print-notice-heading {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #111827 !important;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .print-notice-text {
+    font-size: 10pt;
+    color: #4B5563 !important;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* SECTIONS */
+  .print-section {
+    margin-bottom: 1rem;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-section-title {
+    font-size: 10pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #1F2937 !important;
+    border-bottom: 1px solid #E5E7EB !important;
+    padding-bottom: 0.25rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  /* KEY-VALUE GRIDS */
+  .print-grid-two {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem 1.25rem;
+    background-color: #F9FAFB !important;
+    border: 1px solid #E5E7EB !important;
+    border-radius: 4px;
+    padding: 0.6rem 0.85rem;
+  }
+
+  .print-grid-three {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem 1rem;
+    background-color: #F9FAFB !important;
+    border: 1px solid #E5E7EB !important;
+    border-radius: 4px;
+    padding: 0.6rem 0.85rem;
+  }
+
+  .print-kv-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 9pt;
+    padding: 0.1rem 0;
+  }
+
+  .print-kv-label {
+    color: #4B5563 !important;
+    font-weight: 500;
+  }
+
+  .print-kv-value {
+    color: #111827 !important;
+    font-weight: 700;
+    text-align: right;
+  }
+
+  /* PROJECTION CARDS */
+  .print-projection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+
+  .print-projection-card {
+    border: 1px solid #E5E7EB !important;
+    border-radius: 4px;
+    padding: 0.6rem;
+    background-color: #FFFFFF !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .print-projection-card.highlight-gap {
+    border-color: #FDBA74 !important;
+    background-color: #FFF7ED !important;
+  }
+
+  .print-card-label {
+    font-size: 8pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #4B5563 !important;
+    margin-bottom: 0.2rem;
+  }
+
+  .print-card-value {
+    font-size: 13pt;
+    font-weight: 800;
+    color: #111827 !important;
+    margin-bottom: 0.2rem;
+  }
+
+  .print-card-value.text-gap {
+    color: #C2410C !important;
+  }
+
+  .print-card-note {
+    font-size: 7.5pt;
+    color: #6B7280 !important;
+    line-height: 1.25;
+  }
+
+  /* PRIMARY MONTHLY CONTRIBUTION HIGHLIGHT */
+  .print-primary-highlight {
+    border: 2px solid #0F766E !important;
+    border-radius: 6px;
+    background-color: #F0FDFA !important;
+    padding: 0.85rem 1rem;
+    text-align: center;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-highlight-subtitle {
+    font-size: 7.5pt;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0F766E !important;
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+
+  .print-highlight-title {
+    font-size: 12pt;
+    font-weight: 800;
+    color: #111827 !important;
+    margin: 0 0 0.35rem 0;
+  }
+
+  .print-primary-amount {
+    font-size: 21pt;
+    font-weight: 800;
+    color: #0F766E !important;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+
+  .print-highlight-caption {
+    font-size: 8.5pt;
+    color: #4B5563 !important;
+    margin: 0 auto;
+    max-width: 90%;
+    line-height: 1.35;
+  }
+
+  /* SCENARIO COMPARISON TABLE */
+  .print-table-wrap {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .print-scenario-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.5pt;
+    text-align: left;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-scenario-table th,
+  .print-scenario-table td {
+    padding: 0.4rem 0.55rem;
+    border: 1px solid #E5E7EB !important;
+  }
+
+  .print-scenario-table th {
+    background-color: #F3F4F6 !important;
+    font-weight: 700;
+    color: #1F2937 !important;
+    text-transform: uppercase;
+    font-size: 7.5pt;
+    letter-spacing: 0.03em;
+  }
+
+  .print-scenario-table tr:nth-child(even) td {
+    background-color: #F9FAFB !important;
+  }
+
+  .print-scenario-table td.text-bold {
+    font-weight: 700;
+  }
+
+  .print-scenario-table td.text-highlight {
+    font-weight: 700;
+    color: #0F766E !important;
+  }
+
+  /* METHODOLOGY & ASSUMPTIONS */
+  .print-methodology-text p {
+    font-size: 8.5pt;
+    color: #374151 !important;
+    margin: 0 0 0.25rem 0;
+    line-height: 1.35;
+  }
+
+  .print-methodology-text code {
+    font-family: monospace;
+    font-size: 8pt;
+    background-color: #F3F4F6;
+    padding: 1px 3px;
+    border-radius: 2px;
+  }
+
+  .print-bullet-list {
+    margin: 0;
+    padding-left: 1.15rem;
+    font-size: 8.5pt;
+    color: #374151 !important;
+    line-height: 1.35;
+  }
+
+  .print-bullet-list li {
+    margin-bottom: 0.2rem;
+  }
+
+  /* EDUCATIONAL DISCLAIMER BOX */
+  .print-disclaimer-box {
+    border: 1px solid #D1D5DB !important;
+    border-radius: 4px;
+    background-color: #F9FAFB !important;
+    padding: 0.6rem 0.85rem;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-disclaimer-title {
+    font-size: 9pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #4B5563 !important;
+    margin: 0 0 0.25rem 0;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  .print-disclaimer-text {
+    font-size: 8pt;
+    color: #4B5563 !important;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  /* REPORT FOOTER */
+  .print-footer {
+    margin-top: 1rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid #E5E7EB !important;
+    font-size: 7.5pt;
+    color: #6B7280 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .print-footer-brand {
+    font-weight: 600;
+    color: #374151 !important;
+  }
+}
+
+
+

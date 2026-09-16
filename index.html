@@ -79,6 +79,25 @@
             </p>
           </div>
 
+          <!-- Active Scenario Editing / Alternate Status Banner -->
+          <div id="scenarioEditBanner" class="scenario-edit-banner" role="status" aria-live="polite" style="display: none;">
+            <div class="scenario-edit-banner-content">
+              <div class="scenario-edit-banner-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+              </div>
+              <div class="scenario-edit-banner-text">
+                <strong id="scenarioEditBannerTitle">Editing Scenario</strong>
+                <span id="scenarioEditBannerDesc">Modify assumptions below, then click Calculate &amp; Save.</span>
+              </div>
+            </div>
+            <button type="button" id="cancelScenarioEditBtn" class="btn-scenario-banner-cancel" aria-label="Cancel scenario editing">
+              Cancel
+            </button>
+          </div>
+
           <form id="scenarioForm" class="scenario-form" novalidate>
             
             <!-- 1. What are you planning for? (Goal Library & Custom Goal) -->
@@ -250,6 +269,42 @@
               <span id="currentSavingsHint" class="input-hint">Existing savings already allocated to this goal.</span>
             </div>
 
+            <!-- Optional Step-up Contribution (Advanced Planning) -->
+            <details class="advanced-accordion" id="stepUpDetails">
+              <summary class="advanced-summary">
+                <span class="advanced-summary-text">
+                  <svg class="summary-caret" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                  <span>Advanced: Increase contribution over time (Step-up)</span>
+                </span>
+                <span class="advanced-badge">Optional</span>
+              </summary>
+              <div class="advanced-content">
+                <div class="form-group mb-0">
+                  <label for="stepUpRate" class="form-label">
+                    Annual step-up contribution increase (optional)
+                  </label>
+                  <div class="input-affix-group">
+                    <input 
+                      type="number" 
+                      id="stepUpRate" 
+                      name="stepUpRate" 
+                      class="form-input affix-input-left" 
+                      value="0" 
+                      min="0" 
+                      max="50" 
+                      step="any" 
+                      placeholder="0" 
+                      aria-describedby="stepUpRateHint"
+                    >
+                    <span class="input-suffix" aria-hidden="true">% per year</span>
+                  </div>
+                  <span id="stepUpRateHint" class="input-hint">Default is 0% (constant monthly contribution). If set (e.g. 5%–10%), your contribution increases once each year to match expected salary increments.</span>
+                </div>
+              </div>
+            </details>
+
             <!-- Form Action Buttons -->
             <div class="form-actions">
               <button type="button" id="calculateBtn" class="btn btn-primary">
@@ -282,7 +337,27 @@
             <span class="section-eyebrow">Scenario Projection</span>
             <h2 id="results-title" class="section-title">Your scenario</h2>
           </div>
-          <span class="scenario-target-badge" id="displayGoalBadge">No goal selected</span>
+          <div class="results-header-meta">
+            <span class="scenario-target-badge" id="displayGoalBadge">No goal selected</span>
+            <div class="results-header-actions" role="toolbar" aria-label="Scenario export options">
+              <button type="button" id="printSummaryBtn" class="btn-action-outline" aria-label="Print scenario summary" title="Print scenario summary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                  <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                <span>Print</span>
+              </button>
+              <button type="button" id="downloadSummaryBtn" class="btn-action-outline" aria-label="Download scenario text file" title="Download scenario summary">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Download</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <!-- Prominent Monthly Contribution Card -->
@@ -299,6 +374,53 @@
                 <span class="metric-unit prominent-unit">/ month</span>
               </div>
               <span class="prominent-annotation" id="prominentAnnotation">Awaiting scenario</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario Save & Alternate Flow Action Bar -->
+        <div class="card scenario-action-bar-card" id="scenarioSaveActionsBar" style="display: none;">
+          <div class="scenario-action-bar-inner">
+            <div class="scenario-action-btns">
+              <button type="button" id="saveScenarioBtn" class="btn btn-save-scenario">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                  <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                  <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
+                <span id="saveScenarioBtnText">Save this scenario</span>
+              </button>
+              <button type="button" id="createAlternateBtn" class="btn btn-alternate-scenario" style="display: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>+ Create alternate scenario</span>
+              </button>
+            </div>
+            
+            <!-- Accessible Inline Scenario Name Input & Confirmation -->
+            <div id="saveScenarioInline" class="save-scenario-inline" style="display: none;" role="region" aria-label="Scenario name form">
+              <div class="save-scenario-inline-box">
+                <div class="save-scenario-field">
+                  <label for="scenarioNameInput" class="save-scenario-label">Scenario Name</label>
+                  <div class="save-scenario-inputs">
+                    <input 
+                      type="text" 
+                      id="scenarioNameInput" 
+                      class="form-input text-input" 
+                      placeholder="e.g., My Current Plan, Higher Inflation" 
+                      maxlength="50"
+                      aria-describedby="scenarioNameNote"
+                    >
+                    <button type="button" id="confirmSaveScenarioBtn" class="btn btn-primary btn-sm">Confirm Save</button>
+                    <button type="button" id="cancelSaveScenarioBtn" class="btn btn-secondary btn-sm">Cancel</button>
+                  </div>
+                </div>
+                <span id="scenarioNameNote" class="input-hint">
+                  Stored only in your browser session. Leave blank to auto-generate a scenario name.
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -384,67 +506,87 @@
           </div>
         </div>
 
-        <!-- Visual Comparison Section -->
+        <!-- Visual Comparison Section (Feature 3) -->
         <div class="card visual-comparison-card" aria-labelledby="viz-title">
           <div class="viz-header">
             <div>
               <h3 id="viz-title" class="viz-heading">Visual Comparison</h3>
-              <p class="viz-subhead">Horizontal comparison of target cost, projected savings, and funding gap.</p>
+              <p class="viz-subhead">Visual proportional representation of scenario metrics.</p>
             </div>
-            <span class="viz-badge">Proportional Scale</span>
+            <div class="viz-header-controls">
+              <div class="viz-mode-toggle" role="tablist" aria-label="Visual comparison modes">
+                <button type="button" id="vizModeBase" class="viz-toggle-btn is-active" role="tab" aria-selected="true" aria-controls="vizTracksBase">Base Breakdown</button>
+                <button type="button" id="vizModeCompare" class="viz-toggle-btn" role="tab" aria-selected="false" aria-controls="vizTracksCompare">Compare Scenarios</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accessible Textual Summary for Screen Readers & Clarity (Feature 3) -->
+          <div id="vizAccessibleSummary" class="viz-accessible-summary" role="status" aria-live="polite">
+            Enter your assumptions and calculate to view the visual breakdown.
           </div>
 
           <!-- Functional Responsive Horizontal Comparison Bars -->
           <div class="comparison-viz" role="region" aria-label="Goal cost and funding visual comparison">
             
-            <!-- 1. Estimated Goal Cost at Target Date -->
-            <div class="comparison-row">
-              <div class="comparison-label-row">
-                <span class="comparison-label">
-                  <span class="comparison-bullet bullet-cost" aria-hidden="true"></span>
-                  Estimated goal cost at target date
-                </span>
-                <span class="comparison-values">
-                  <strong class="comparison-compact" id="vizCostCompact">₹0</strong>
-                  <span class="comparison-precise" id="vizCostPrecise">(₹0)</span>
-                </span>
+            <!-- Base Scenario Breakdown Tracks -->
+            <div id="vizTracksBase" class="viz-track-group">
+              <!-- 1. Estimated Goal Cost at Target Date -->
+              <div class="comparison-row">
+                <div class="comparison-label-row">
+                  <span class="comparison-label">
+                    <span class="comparison-bullet bullet-cost" aria-hidden="true"></span>
+                    Estimated goal cost at target date
+                  </span>
+                  <span class="comparison-values">
+                    <strong class="comparison-compact" id="vizCostCompact">₹0</strong>
+                    <span class="comparison-precise" id="vizCostPrecise">(₹0)</span>
+                  </span>
+                </div>
+                <div class="comparison-track" id="vizCostTrack" role="progressbar" aria-label="Estimated goal cost at target date" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="₹0">
+                  <div class="comparison-bar-fill bar-cost" id="vizBarCost" style="width: 0%;"></div>
+                </div>
               </div>
-              <div class="comparison-track" id="vizCostTrack" role="progressbar" aria-label="Estimated goal cost at target date" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="₹0">
-                <div class="comparison-bar-fill bar-cost" id="vizBarCost" style="width: 0%;"></div>
+
+              <!-- 2. Projected Future Value of Current Savings -->
+              <div class="comparison-row">
+                <div class="comparison-label-row">
+                  <span class="comparison-label">
+                    <span class="comparison-bullet bullet-savings" aria-hidden="true"></span>
+                    Projected future value of current savings
+                  </span>
+                  <span class="comparison-values">
+                    <strong class="comparison-compact" id="vizSavingsCompact">₹0</strong>
+                    <span class="comparison-precise" id="vizSavingsPrecise">(₹0)</span>
+                  </span>
+                </div>
+                <div class="comparison-track" id="vizSavingsTrack" role="progressbar" aria-label="Projected future value of current savings" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="₹0">
+                  <div class="comparison-bar-fill bar-savings" id="vizBarSavings" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <!-- 3. Estimated Funding Gap -->
+              <div class="comparison-row">
+                <div class="comparison-label-row">
+                  <span class="comparison-label">
+                    <span class="comparison-bullet bullet-gap" aria-hidden="true"></span>
+                    Estimated funding gap
+                  </span>
+                  <span class="comparison-values">
+                    <strong class="comparison-compact" id="vizGapCompact">₹0</strong>
+                    <span class="comparison-precise" id="vizGapPrecise">(₹0)</span>
+                  </span>
+                </div>
+                <div class="comparison-track" id="vizGapTrack" role="progressbar" aria-label="Estimated funding gap" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="₹0">
+                  <div class="comparison-bar-fill bar-gap" id="vizBarGap" style="width: 0%;"></div>
+                </div>
               </div>
             </div>
 
-            <!-- 2. Projected Future Value of Current Savings -->
-            <div class="comparison-row">
-              <div class="comparison-label-row">
-                <span class="comparison-label">
-                  <span class="comparison-bullet bullet-savings" aria-hidden="true"></span>
-                  Projected future value of current savings
-                </span>
-                <span class="comparison-values">
-                  <strong class="comparison-compact" id="vizSavingsCompact">₹0</strong>
-                  <span class="comparison-precise" id="vizSavingsPrecise">(₹0)</span>
-                </span>
-              </div>
-              <div class="comparison-track" id="vizSavingsTrack" role="progressbar" aria-label="Projected future value of current savings" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="₹0">
-                <div class="comparison-bar-fill bar-savings" id="vizBarSavings" style="width: 0%;"></div>
-              </div>
-            </div>
-
-            <!-- 3. Estimated Funding Gap -->
-            <div class="comparison-row">
-              <div class="comparison-label-row">
-                <span class="comparison-label">
-                  <span class="comparison-bullet bullet-gap" aria-hidden="true"></span>
-                  Estimated funding gap
-                </span>
-                <span class="comparison-values">
-                  <strong class="comparison-compact" id="vizGapCompact">₹0</strong>
-                  <span class="comparison-precise" id="vizGapPrecise">(₹0)</span>
-                </span>
-              </div>
-              <div class="comparison-track" id="vizGapTrack" role="progressbar" aria-label="Estimated funding gap" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="₹0">
-                <div class="comparison-bar-fill bar-gap" id="vizBarGap" style="width: 0%;"></div>
+            <!-- Compare Scenarios Tracks (Dynamic User Scenarios) -->
+            <div id="vizTracksCompare" class="viz-track-group" style="display: none;" role="region" aria-label="Visual comparison of saved scenarios">
+              <div id="vizDynamicCompareTracks" class="viz-dynamic-compare-tracks">
+                <!-- Dynamically populated with user scenarios by script.js -->
               </div>
             </div>
 
@@ -452,6 +594,61 @@
               Bars are scaled proportionally to the largest value in this scenario. Values and labels convey full comparison information independently of color.
             </p>
           </div>
+        </div>
+
+        <!-- Your Saved Scenarios Section -->
+        <div class="card saved-scenarios-card" id="savedScenariosCard" aria-labelledby="saved-scenarios-title">
+          <div class="saved-scenarios-header">
+            <div>
+              <span class="section-eyebrow">Personal Planning Scenarios</span>
+              <h3 id="saved-scenarios-title" class="saved-scenarios-title">Your saved scenarios</h3>
+              <p class="saved-scenarios-subhead">
+                Review, edit, duplicate or compare the custom scenarios you have saved during this session.
+              </p>
+            </div>
+            <div class="saved-scenarios-meta">
+              <span class="privacy-pill-sm" title="Stored in this browser session only">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                Session only
+              </span>
+              <span class="saved-scenarios-count" id="savedScenariosCount">0 saved</span>
+            </div>
+          </div>
+
+          <!-- Saved Scenarios List Container -->
+          <div class="saved-scenarios-list" id="savedScenariosList" role="region" aria-label="List of saved scenarios">
+            <!-- Dynamic scenario cards or empty state injected by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Compare Your Scenarios Section (When 2+ scenarios exist) -->
+        <div class="card scenario-comparison-card" id="scenarioComparisonCard" aria-labelledby="comparison-title" style="display: none;">
+          <div class="comparison-card-header">
+            <div>
+              <span class="section-eyebrow">Multi-Scenario Analysis</span>
+              <h3 id="comparison-title" class="comparison-card-title">Compare your scenarios</h3>
+              <p class="comparison-card-subhead">
+                Side-by-side comparison of your saved planning scenarios based on your own assumptions.
+              </p>
+            </div>
+            <span class="comparison-card-badge" id="comparisonScenarioCountBadge">2 Scenarios</span>
+          </div>
+
+          <!-- Comparison Matrix Container (Table / Responsive Cards) -->
+          <div id="comparisonContent" class="comparison-content">
+            <!-- Dynamic comparison matrix rendered by JavaScript -->
+          </div>
+
+          <div id="comparisonNarrative" class="comparison-narrative" role="region" aria-label="Comparative Scenario Narrative">
+            <!-- Plain-language neutral comparison statements injected by JavaScript -->
+          </div>
+
+          <p class="comparison-note">
+            Calculations are illustrative estimates based solely on the assumptions you entered for each scenario. Scenarios are not ranked or evaluated as recommendations.
+          </p>
         </div>
 
         <!-- Plain-language Summary -->
@@ -580,6 +777,20 @@
                     If the assumed annual return is 0%, the monthly contribution is calculated linearly without compounding as <em>Funding gap / months</em>, and projected growth is ₹0.
                   </p>
                 </div>
+
+                <!-- Step 5: Optional Annual Step-Up -->
+                <div class="formula-block">
+                  <div class="formula-header">
+                    <span class="step-num">Step 5</span>
+                    <h4 class="formula-name">Optional Annual Step-Up</h4>
+                  </div>
+                  <div class="formula-code" role="region" aria-label="Formula for Annual Step-Up Contribution">
+                    <code>P = Funding Gap / &sum;<sub>y=0</sub><sup>n-1</sup> [ (1 + g)<sup>y</sup> &times; (((1 + r)<sup>12</sup> &minus; 1) / r) &times; (1 + r)<sup>12(n &minus; y &minus; 1)</sup> ]</code>
+                  </div>
+                  <p class="formula-desc">
+                    If an annual step-up rate <em>g</em> is entered, contributions increase by <em>g%</em> each year. The starting monthly contribution <em>P</em> compounds in 12-month blocks. When step-up is 0%, the formula simplifies identically to the standard monthly contribution.
+                  </p>
+                </div>
               </div>
 
               <div class="methodology-note">
@@ -647,6 +858,170 @@
       </p>
     </div>
   </footer>
+
+  <!-- DEDICATED PRINT REPORT (Displayed ONLY when printing via @media print) -->
+  <div id="printReport" class="print-report" aria-hidden="true">
+    
+    <!-- 2. REPORT HEADER -->
+    <header class="print-header">
+      <div class="print-brand-row">
+        <div>
+          <h1 class="print-brand-title">GOALBRIDGE</h1>
+          <p class="print-brand-subtitle">Goal Planning &amp; Investment Illustration</p>
+        </div>
+        <div class="print-meta-box">
+          <p class="print-report-type">Goal Planning Summary</p>
+          <p class="print-date" id="printReportDate">Date: —</p>
+        </div>
+      </div>
+      <div class="print-divider"></div>
+    </header>
+
+    <!-- NEUTRAL / EMPTY STATE NOTICE (Shown only if printing prior to calculation) -->
+    <div id="printNeutralNotice" class="print-neutral-notice" style="display: none;">
+      <p class="print-notice-heading">No Goal Calculation Completed</p>
+      <p class="print-notice-text">No active planning scenario has been calculated yet. Please open GoalBridge in your web browser, select or enter your goal assumptions, and click "Calculate My Scenario" to generate a complete personalized report.</p>
+    </div>
+
+    <!-- CALCULATED REPORT BODY -->
+    <div id="printCalculatedContent">
+      
+      <!-- 3. GOAL INFORMATION -->
+      <section class="print-section">
+        <h2 class="print-section-title">YOUR GOAL</h2>
+        <div class="print-grid-two">
+          <div class="print-kv-item">
+            <span class="print-kv-label">Goal Name:</span>
+            <strong class="print-kv-value" id="printGoalName">—</strong>
+          </div>
+          <div class="print-kv-item">
+            <span class="print-kv-label">Goal Amount Today:</span>
+            <strong class="print-kv-value" id="printGoalCostToday">—</strong>
+          </div>
+          <div class="print-kv-item">
+            <span class="print-kv-label">Time Remaining:</span>
+            <strong class="print-kv-value" id="printTargetYears">—</strong>
+          </div>
+          <div class="print-kv-item">
+            <span class="print-kv-label">Inflation Assumption:</span>
+            <strong class="print-kv-value" id="printInflationRate">—</strong>
+          </div>
+          <div class="print-kv-item">
+            <span class="print-kv-label">Expected Annual Investment Return:</span>
+            <strong class="print-kv-value" id="printInvestmentReturn">—</strong>
+          </div>
+          <div class="print-kv-item">
+            <span class="print-kv-label">Current Savings:</span>
+            <strong class="print-kv-value" id="printCurrentSavings">—</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. MAIN PROJECTION -->
+      <section class="print-section">
+        <h2 class="print-section-title">PROJECTION AT GOAL DATE</h2>
+        <div class="print-projection-grid">
+          <div class="print-projection-card">
+            <span class="print-card-label">Estimated Cost at Goal Date</span>
+            <strong class="print-card-value" id="printFutureGoalCost">—</strong>
+            <span class="print-card-note">Today's cost adjusted for assumed annual inflation.</span>
+          </div>
+          <div class="print-projection-card">
+            <span class="print-card-label">Future Value of Current Savings</span>
+            <strong class="print-card-value" id="printFutureSavings">—</strong>
+            <span class="print-card-note">Existing savings compounded monthly at assumed return.</span>
+          </div>
+          <div class="print-projection-card highlight-gap">
+            <span class="print-card-label">Estimated Funding Gap</span>
+            <strong class="print-card-value text-gap" id="printFundingGap">—</strong>
+            <span class="print-card-note">Net shortfall to accumulate through monthly savings.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. MONTHLY CONTRIBUTION (PRIMARY RESULT) -->
+      <section class="print-section">
+        <div class="print-primary-highlight">
+          <span class="print-highlight-subtitle">PRIMARY PLANNING RESULT</span>
+          <h2 class="print-highlight-title">ESTIMATED MONTHLY CONTRIBUTION</h2>
+          <div class="print-primary-amount" id="printMonthlyContribution">₹0 / month</div>
+          <p class="print-highlight-caption">
+            Estimated monthly contribution based on the assumptions entered. This is an educational mathematical projection, not investment advice or a guaranteed savings amount.
+          </p>
+        </div>
+      </section>
+
+      <!-- 6. STEP-UP ASSUMPTION (CONDITIONAL) -->
+      <section class="print-section" id="printStepUpSection" style="display: none;">
+        <h2 class="print-section-title">STEP-UP ASSUMPTION</h2>
+        <div class="print-grid-three">
+          <div class="print-kv-item">
+            <span class="print-kv-label">Annual Contribution Increase:</span>
+            <strong class="print-kv-value" id="printStepUpRate">0%</strong>
+          </div>
+          <div class="print-kv-item">
+            <span class="print-kv-label">Starting Monthly Contribution:</span>
+            <strong class="print-kv-value" id="printStepUpStarting">—</strong>
+          </div>
+          <div class="print-kv-item">
+            <span class="print-kv-label">Estimated Contribution in Final Year:</span>
+            <strong class="print-kv-value" id="printStepUpFinal">—</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. USER-CREATED SCENARIOS (CONDITIONAL) -->
+      <section class="print-section" id="printScenariosSection" style="display: none;">
+        <h2 class="print-section-title" id="printScenariosTitle">SCENARIO COMPARISON</h2>
+        <div class="print-table-wrap" id="printScenariosTableWrap">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </section>
+
+      <!-- 9. METHODOLOGY -->
+      <section class="print-section">
+        <h2 class="print-section-title">HOW THIS ESTIMATE IS CALCULATED</h2>
+        <div class="print-methodology-text">
+          <p>&bull; <strong>Future goal cost</strong> is estimated by compounding today's goal cost using the user-specified annual inflation rate over the planning horizon: <code>P &times; (1 + i)<sup>years</sup></code>.</p>
+          <p>&bull; <strong>Future value of current savings</strong> is calculated using monthly compounding based on the assumed annual investment return: <code>S &times; (1 + r/12)<sup>12 &times; years</sup></code>.</p>
+          <p>&bull; <strong>The funding gap</strong> is the net shortfall between the estimated future goal cost and the projected future value of current savings: <code>max(0, Future Cost &minus; Future Savings)</code>.</p>
+          <p>&bull; <strong>The estimated monthly contribution</strong> is calculated using monthly compounding and end-of-month contribution annuity formulas over the remaining months. When assumed annual return is 0%, contributions are determined linearly as funding gap divided by total months.</p>
+        </div>
+      </section>
+
+      <!-- 10. ASSUMPTIONS -->
+      <section class="print-section">
+        <h2 class="print-section-title">ASSUMPTIONS</h2>
+        <ul class="print-bullet-list">
+          <li>Inflation is an illustrative assumption entered by the user.</li>
+          <li>Investment return is an illustrative assumption and is not guaranteed.</li>
+          <li>Actual inflation, investment returns and future living costs may differ materially.</li>
+          <li>Current savings are assumed to remain fully allocated to this goal throughout the horizon.</li>
+          <li>Monthly contributions are assumed to occur at the end of each calendar month.</li>
+          <li>Results are mathematical illustrations and not predictions.</li>
+          <li id="printStepUpAssumptionNote" style="display: none;">Step-up assumes the monthly contribution increases by the selected percentage once each year. This does not imply that income or affordability will increase.</li>
+        </ul>
+      </section>
+
+      <!-- 11. EDUCATIONAL DISCLAIMER -->
+      <section class="print-section print-disclaimer-box">
+        <h2 class="print-disclaimer-title">EDUCATIONAL DISCLAIMER</h2>
+        <p class="print-disclaimer-text">
+          This report is an educational illustration based on the assumptions entered by the user. It is not investment, financial, tax or legal advice and does not recommend any investment product or strategy. Actual results may differ.
+        </p>
+      </section>
+
+    </div><!-- /#printCalculatedContent -->
+
+    <!-- 12. REPORT FOOTER -->
+    <footer class="print-footer">
+      <div class="print-footer-row">
+        <span class="print-footer-brand">GoalBridge &bull; Educational Goal Planning Tool</span>
+        <span class="print-footer-note">Generated locally &mdash; no personal data is stored or transmitted.</span>
+      </div>
+    </footer>
+
+  </div><!-- /#printReport -->
 
   <script src="script.js"></script>
 </body>
