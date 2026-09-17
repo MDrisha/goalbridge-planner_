@@ -16,8 +16,6 @@
 ## Quick Links
 
 - 🚀 **[Launch Live Application](https://6aaa7304d65cdd0008e9339b--goalbridge-planner.netlify.app/)** *(or open `index.html` directly in any browser)*
-- 📄 **[Formal Project Report (4-Page PDF)](GoalBridge_Project_Report.pdf)**
-- 📖 **[Master Project Report (Markdown)](PROJECT_REPORT.md)**
 - 🧪 **[Completed Test Evidence Matrix](TEST_EVIDENCE.md)**
 - 🤖 **[AI Collaboration & Use Log](AI_USE_LOG.md)**
 - 🛡️ **[Accessibility & Technical Audit](AUDIT.md)**
