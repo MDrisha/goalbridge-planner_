@@ -1,183 +1,223 @@
 # GoalBridge
 
-> **An educational goal-planning tool empowering first-time earners to understand how inflation, time, existing savings, and assumed returns shape their monthly contribution path.**
+> **An interactive, educational goal-planning platform empowering Indian retail savers to understand how inflation, time horizons, existing savings, and annual contribution step-ups shape their path toward financial milestones.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-teal.svg)](LICENSE)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla-JavaScript-F7DF1E?logo=javascript&logoColor=black)](script.js)
 [![HTML5 / CSS3](https://img.shields.io/badge/Frontend-HTML5%20%7C%20CSS3-E34F26?logo=html5&logoColor=white)](index.html)
 [![WCAG 2.1 AA](https://img.shields.io/badge/Accessibility-WCAG%202.1%20AA-0F766E)](index.html)
+[![Tests: 100% Passed](https://img.shields.io/badge/Tests-141%2F141%20Passed-22C55E)](TEST_EVIDENCE.md)
 [![Audit: 100% Passed](https://img.shields.io/badge/Audit-Passed-0F766E)](AUDIT.md)
-[![Tests: 100% Passed](https://img.shields.io/badge/Tests-76%2F76%20Passed-22C55E)](#testing-summary)
+[![Compliance: SEBI Aligned](https://img.shields.io/badge/Compliance-SEBI%20Non--Advisory-0284C7)](PROJECT_REPORT.md)
+[![Report: 4--Page PDF](https://img.shields.io/badge/Project%20Report-4--Page%20PDF-DC2626)](GoalBridge_Project_Report.pdf)
 
 ---
 
-## Live Demo
+## Quick Links
 
-🔗 **[Launch GoalBridge Live Application](https://drisha.github.io/goal-bridge/)**  
-*(Or open `index.html` directly in any web browser — no build steps, backend, or internet connection required.)*
-
----
-
-## Features
-
-- **Structured Goal Library (28 Predefined Goals + Custom Goal)**  
-  Organized across 6 life categories (*Financial Foundation*, *Education & Career*, *Lifestyle*, *Family*, *Children*, *Experiences*) plus *Something Else*. Each goal card includes sensible starter defaults: icon, example today's cost, horizon, and goal-specific annual inflation rate.
-- **✨ "Create My Own Goal" Option**  
-  Selectable custom goal with automatically cleared, focused input, baseline custom inflation of 6%, and full freedom to model unique aspirations.
-- **Assumption Edit Preservation**  
-  Selecting a goal populates starting defaults, but any subsequent user customization of cost, horizon, inflation, return, or savings is strictly preserved until another goal card is explicitly chosen.
-- **Robust Time-Value-of-Money Engine**  
-  Pure, modular financial formulas implementing inflation compounding for future goal cost, monthly compounding for current savings, net funding gap determination, and end-of-month contribution annuity formulas.
-- **Zero-Return & Zero-Gap Safe Handling**  
-  - **Zero Return ($r = 0\%$)**: Gracefully falls back to linear funding ($\text{Gap} / n$), reporting strictly ₹0 compounding growth with zero risk of `NaN` or division-by-zero errors.
-  - **Zero Gap ($\text{Savings} \ge \text{Goal Cost}$)**: Highlights that existing savings satisfy the projected target, setting monthly contribution to ₹0 with reassuring educational messaging.
-- **⚖️ User-Created Scenario Comparison**  
-  Empowers users to create, save, edit, duplicate, delete, and compare multiple alternate planning scenarios based on their own custom assumptions:
-  - **Save This Scenario**: Saves the current calculated plan into the active session with custom or automatic naming ("Scenario 1", "Scenario 2").
-  - **+ Create Alternate Scenario**: Clones active assumptions into the input builder to easily model "what-if" alternatives (e.g. higher inflation, earlier target horizon, or higher current savings) without mutating previous scenarios.
-  - **Side-by-Side Comparison Table**: Dynamically renders when 2 or more scenarios exist, contrasting inputs and key projected outcomes side-by-side with responsive horizontal scrolling.
-  - **Neutral Comparative Narrative**: Objective, non-judgmental plain-language comparison without automatic ranking, winners, or recommendations.
-  - **Visual Comparison Bars**: Scaled horizontal bar chart visualizing required monthly contributions across saved scenarios.
-  - **Session-Only Privacy**: Scenarios are stored exclusively in `sessionStorage`, surviving in-session page reloads without sending data to servers.
-- **📈 Optional Step-up Contribution (Advanced Planning)**  
-  Expandable disclosure allowing users to model contributions that increase annually (e.g. $5\%–10\%$) to match expected salary progression. Uses exact 12-month block TVM summation compounding. When set to $0\%$, results collapse identically to the standard flat monthly contribution.
-- **📊 Accessible Dynamic Visualizations**  
-  Interactive horizontal comparison bars scaled proportionally to the largest metric:
-  - **Base Breakdown**: Proportional scale of Estimated Goal Cost, Projected Savings, and Funding Gap.
-  - **Compare Scenarios**: Visual bar comparison of required monthly contributions across all user-saved scenarios.
-  - Includes dedicated screen-reader live announcements (`#vizAccessibleSummary`) and ARIA progressbar semantics.
-- **🖨️ Clean Financial Planning Report (Print & Download)**  
-  - **Print Report (`window.print()`)**: Dedicated `#printReport` container rendered exclusively during `@media print`. Generates a clean, professional 10-section financial planning report (Goal Parameters, Projections at Goal Date, Highlighted Monthly Contribution, Conditional Step-up, User Scenario Comparison Matrix, Methodology, Assumptions, Disclaimer, and Footer) with zero interactive web chrome.
-  - **Download Text Report (`goalbridge-summary.txt`)**: Generates an identical structured, client-side plain-text report matching the 10-section hierarchy with Indian currency formatting (`₹12,00,000`).
-  - **Reset Safety**: When invoked before a calculation or after clicking Reset, both Print and Download output a clear neutral notice (*"No Goal Calculation Completed"*) rather than stale values.
-- **Plain-Language Scenario Explanation**  
-  Dynamic narrative translation that explains exactly what the numbers mean in clear, jargon-free Indian Lakh/Crore phrasing.
-- **Accessible, Educational Validation**  
-  Friendly inline feedback with SVG alert icons, semantic badges (`[Error]`, `[Caution]`), screen-reader attributes (`aria-invalid`, `aria-describedby`), focus management, and contextual warnings for unusually high inflation (>12%), return (>15%), or step-up (>20%) assumptions.
-- **100% Client-Side & Private**  
-  Zero tracking, zero analytics, zero cookies, zero APIs, zero external CDNs, and zero personal data collection. Runs entirely in the user's browser.
-- **Indian Rupee Formatting (`en-IN`)**  
-  Faithfully displays amounts using `Intl.NumberFormat('en-IN')` (e.g. `₹12,00,000`, `₹1,50,000`), never Western comma grouping.
+- 🚀 **[Launch Live Application](https://6aaa7304d65cdd0008e9339b--goalbridge-planner.netlify.app/)** *(or open `index.html` directly in any browser)*
+- 📄 **[Formal Project Report (4-Page PDF)](GoalBridge_Project_Report.pdf)**
+- 📖 **[Master Project Report (Markdown)](PROJECT_REPORT.md)**
+- 🧪 **[Completed Test Evidence Matrix](TEST_EVIDENCE.md)**
+- 🤖 **[AI Collaboration & Use Log](AI_USE_LOG.md)**
+- 🛡️ **[Accessibility & Technical Audit](AUDIT.md)**
 
 ---
 
-## Inputs, Outputs and Calculation Approach
+## Project Overview
+
+**GoalBridge** is a high-performance, client-side financial literacy utility engineered to eliminate the cognitive blindspots associated with long-term savings in India. Most savers instinctively plan using today's prices, unaware of the compounding erosion caused by inflation. Furthermore, commercial online calculators are frequently hosted by brokerage firms or fund houses that double as product sales funnels.
+
+GoalBridge operates with strict **educational neutrality**:
+1. **No Product Recommendations**: Does not recommend mutual fund schemes, insurance policies, or financial instruments.
+2. **Zero Commercial Bias**: Strictly educational calculations with zero sponsored links, commissions, or sales funnels.
+3. **100% Client-Side Privacy**: Zero cookies, zero analytics, zero external CDNs, and zero backend tracking. All scenario models reside exclusively in the user's browser session.
+4. **Native Web Standards**: Zero external frameworks or libraries—pure semantic HTML5, responsive CSS3, and modern ES6+ JavaScript. Loads in under 0.5 seconds.
+
+---
+
+## Key Features
+
+### 1. Structured Goal Library (28 Benchmarks + Custom Goal)
+- Categorized across 6 life stages: **Financial Foundation**, **Education & Career**, **Lifestyle**, **Family**, **Children**, and **Experiences**, plus **Something Else**.
+- Each preset auto-populates realistic starter figures: goal icon, example today's cost, target horizon, and category-specific inflation rates (e.g., 6% for general lifestyle, 8% for higher education, 10% for healthcare).
+- **"Create My Own Goal"**: A clean custom option that clears inputs, focuses the goal name field, sets a baseline 6% inflation default, and gives complete modeling freedom.
+- **Assumption Edit Preservation**: Selecting a preset populates baseline figures, but any manual edits made by the user to cost, horizon, inflation, return, or savings are strictly preserved.
+
+### 2. Time-Value-of-Money (TVM) Calculation Engine
+- **Compounding Inflation**: Projects the true future cost of a goal based on annual inflation: $FV = PV(1 + i)^n$.
+- **Compounding Existing Savings**: Projects monthly compounded growth of currently allocated savings: $FV = PV(1 + r_m)^{12n}$.
+- **Net Funding Gap**: Accurately computes the real capital deficit: $\max(0, FV_{\text{goal}} - FV_{\text{savings}})$.
+- **Required Monthly Contribution**: Computes the exact end-of-month ordinary annuity payment required to bridge the deficit.
+- **Zero-Return Handling ($r = 0\%$)**: Gracefully executes a linear fallback ($\text{Funding Gap} / \text{Months}$) with zero growth, preventing `NaN` or division-by-zero crashes.
+- **Zero-Gap Handling ($\text{Savings} \ge \text{Goal Cost}$)**: Detects when existing savings satisfy future costs, sets monthly contribution to ₹0, and displays reassuring educational messaging.
+
+### 3. Optional Step-Up Contribution (Growing Annuity)
+- Expandable disclosure allowing users to model contributions that increase annually by a fixed percentage (e.g., $5\%–10\%$) to align with career salary progression.
+- Built on a **discrete 12-month compounding block model** (contributions remain constant within each year and step up at the start of each subsequent year).
+- Clearly highlights both the **Starting Monthly Contribution** and the **Final Year Monthly Contribution**.
+- When set to $0\%$, results collapse identically to the standard flat monthly contribution.
+
+### 4. User-Created Scenarios & Side-by-Side Comparison
+Empowers users to create, save, edit, duplicate, delete, and compare multiple alternate planning scenarios based on their own custom assumptions:
+- **Save Scenario**: Stores the current calculation into the active session with custom naming or auto-incrementing fallbacks ("Scenario 1", "Scenario 2").
+- **+ Create Alternate Scenario**: Clones active assumptions into the input builder to easily model "what-if" variations (e.g., higher inflation, earlier horizon, or conservative return) without mutating earlier scenarios.
+- **In-Place Scenario Editing**: Clicking "Edit" populates inputs into the form, engages a prominent `#scenarioEditBanner`, and updates the scenario in place without creating duplicates.
+- **Deep-Clone Duplication**: One-click "Duplicate" clones all assumptions and outputs, assigns a fresh unique ID, and appends `(Copy)`.
+- **Side-by-Side Comparison Matrix**: Automatically renders when 2 or more scenarios are saved, displaying a tabular comparison of inputs, outcomes, and difference analyses with responsive horizontal scrolling.
+- **Proportional Visual Bars**: Scaled horizontal progress bars visualizing required monthly contributions across saved scenarios, equipped with ARIA progressbar semantics.
+- **Neutral Comparative Narrative**: Generates plain-language comparative summaries explaining differences neutrally, without assigning "winners" or prescriptive advice.
+- **Session Privacy**: All scenarios persist in `sessionStorage` (`goalbridge_saved_scenarios`), surviving page reloads while keeping data strictly on the client device.
+
+### 5. Dedicated Clean Report (Print & Download)
+- **Isolated Print Output (`window.print()`)**: Built with a dedicated `#printReport` container. Under `@media print`, all interactive screen chrome (navigation, headers, form controls, buttons, sliders) is hidden (`display: none !important`), rendering only a clean, professional, publication-grade 10-section financial planning report.
+- **Structured Plain-Text Download (`goalbridge-summary.txt`)**: Client-side Blob export generating an identical 10-section structured plain-text report with ASCII card borders and Indian currency formatting.
+- **Reset Safety**: Before calculation or after clicking Reset, both Print and Download output a clear neutral notice (*"No Goal Calculation Completed"*) rather than stale values.
+
+### 6. Atomic Reset & Clean Initial Experience
+- **Initial Clean State**: The calculator opens with empty, neutral inputs—no pre-filled clutter.
+- **Atomic Reset**: One click wipes all form inputs to blank/₹0, resets output cards, clears in-memory scenarios, purges `sessionStorage`, and resets print/download queues to neutral.
+- **Screen Reader Feedback**: Dynamic status updates announced via `aria-live="polite"` live regions.
+
+### 7. Accessibility & Indian Localization
+- **WCAG 2.1 AA Compliant**: High contrast ratios ($\ge 4.5:1$, up to $15.6:1$), clear `:focus-visible` outlines, touch targets $\ge 44\text{px}$, and semantic HTML landmarks.
+- **Indian Rupee Notation**: Custom formatting via native `Intl.NumberFormat('en-IN')` displaying amounts in Lakhs and Crores (`₹12,00,000`).
+
+---
+
+## Inputs, Outputs and Calculation Methodology
 
 ### The Inputs
 
-| # | Field | Identifier | Validation Rules | Default / Behavior |
+| # | Field | Identifier | Type / Constraints | Default / Initial State |
 | :-: | :--- | :--- | :--- | :--- |
-| **1** | **Goal** | `#categoryNav` / `#goalName` | Required text; auto-filled by Goal Library presets | Blank on initial load & reset |
-| **2** | **Goal Amount in Today's Money** | `#goalCostToday` | Numeric, $> ₹0$ | Blank on initial load & reset |
-| **3** | **Years Remaining** | `#targetYears` | Numeric integer, $1 \le Y \le 100$ | Blank on initial load & reset |
-| **4** | **Expected Annual Inflation** | `#inflationRate` | Numeric, $0\% \le i \le 50\%$ (Caution if $> 12\%$) | Blank on initial load & reset |
-| **5** | **Expected Annual Investment Return** | `#investmentReturn` | Numeric, $0\% \le r \le 100\%$ (Caution if $> 15\%$) | Blank on initial load & reset |
-| **6** | **Current Savings Already Allocated** | `#currentSavings` | Numeric, $\ge ₹0$ | Defaults to ₹0 |
-| **+** | **Annual Step-up Contribution (Optional)** | `#stepUpRate` | Numeric, $0\% \le g \le 50\%$ (Caution if $> 20\%$) | Defaults to 0% (in Advanced disclosure) |
+| **1** | **Goal Name** | `#goalName` | Text string | Blank (auto-filled by preset) |
+| **2** | **Cost in Today's Money** | `#goalCostToday` | Numeric, $> ₹0$ | Blank on load / reset |
+| **3** | **Time Horizon** | `#targetYears` | Integer, $1 \le Y \le 100$ | Blank on load / reset |
+| **4** | **Expected Annual Inflation** | `#inflationRate` | Percentage, $0\% \le i \le 50\%$ (Caution $>12\%$) | Blank on load / reset |
+| **5** | **Assumed Investment Return** | `#investmentReturn` | Percentage, $0\% \le r \le 100\%$ (Caution $>15\%$) | Blank on load / reset |
+| **6** | **Current Savings Allocated** | `#currentSavings` | Numeric, $\ge ₹0$ | Defaults to ₹0 |
+| **+** | **Annual Step-Up (Optional)** | `#stepUpRate` | Percentage, $0\% \le g \le 50\%$ (Caution $>20\%$) | Defaults to 0% (Advanced section) |
 
 ---
 
 ### Core Outputs
 
-- **Primary Planning Output**: Estimated Monthly Contribution ($\text{₹}M / \text{month}$) (or Starting Monthly Contribution if Step-up is configured).
-- **Future Goal Value**: Projected cost at the target horizon reflecting purchasing power loss.
-- **Projected Future Value of Current Savings**: Earmarked savings compounded monthly.
-- **Estimated Funding Gap**: Net remaining requirement to be accumulated through monthly deposits.
-- **Total Contributions**: Cumulative out-of-pocket savings across the entire timeline.
-- **Illustrative Projected Growth**: Compounding returns generated from deposits ($\text{Funding Gap} - \text{Total Contributions}$).
-- **User Scenario Comparison Matrix**: Side-by-side comparison table contrasting assumptions and outputs across 2 or more custom saved scenarios.
+- **Required Monthly Contribution**: Baseline monthly commitment required to achieve the goal deficit.
+- **Future Goal Cost**: Projected cost after compounding for inflation.
+- **Projected Value of Current Savings**: Earmarked savings compounded over the horizon.
+- **Estimated Funding Gap**: Net remaining deficit that monthly savings must bridge.
+- **Total Contributions**: Cumulative out-of-pocket deposits across the entire tenure.
+- **Illustrative Projected Growth**: Compounding returns earned on monthly installments.
+- **Step-Up Schedule (When Active)**: Explicit breakdown of Year 1 starting deposit vs. Final Year deposit.
+- **Scenario Comparison Matrix**: Tabular side-by-side evaluation across 2+ custom saved scenarios.
 
 ---
 
-### Calculation Methodology & Mathematical Formulas
+### Mathematical Model
 
-All equations follow standard actuarial and time-value-of-money standards:
+All calculations implement standard Time Value of Money (TVM) principles:
 
-#### 1. Basis Variables
-$$\text{Total Months: } n = Y \times 12$$
-$$\text{Monthly Compounding Rate: } r_m = \frac{r}{12}$$
+#### 1. Baseline Variables
+$$\text{Total Months: } N = 12 \times Y \qquad \text{Monthly Compounding Rate: } r_m = \frac{r}{12}$$
 
-#### 2. Future Goal Value (Step 1)
+#### 2. Inflation-Adjusted Future Goal Cost
 Adjusts today's cost ($P$) for annual inflation ($i$) over $Y$ years:
-$$\text{Future Goal Value} = P \times (1 + i)^Y$$
-*(If $i = 0\%$, $\text{Future Goal Value} = P$)*
+$$FV_{\text{goal}} = P \times (1 + i)^Y$$
 
-#### 3. Future Value of Current Savings (Step 2)
-Projects existing savings ($S$) using monthly compounding at annual return ($r$):
-$$\text{Future Value of Savings} = S \times (1 + r_m)^n$$
-*(If $r = 0\%$, $\text{Future Value of Savings} = S$; if $S = 0$, value is $0$)*
+#### 3. Future Value of Existing Savings
+Projects existing savings ($S$) compounded monthly at nominal annual return ($r$):
+$$FV_{\text{savings}} = S \times (1 + r_m)^N \qquad \text{(If } r = 0\%, \, FV_{\text{savings}} = S\text{)}$$
 
-#### 4. Funding Gap (Step 3)
-Calculates the net shortfall between future goal cost and accumulated savings:
-$$\text{Funding Gap} = \max(0, \, \text{Future Goal Value} - \text{Future Value of Savings})$$
+#### 4. Net Funding Gap
+Calculates the real shortfall to be funded through monthly deposits:
+$$\text{Funding Gap} = \max\left(0, \, FV_{\text{goal}} - FV_{\text{savings}}\right)$$
 
-#### 5. Estimated Monthly Contribution (Step 4 — Standard Flat Annuity)
-Assumes equal end-of-month ordinary annuity deposits:
-- **When Assumed Annual Return $r > 0\%$:**
-  $$PMT = \frac{\text{Funding Gap} \times r_m}{(1 + r_m)^n - 1}$$
-- **When Assumed Annual Return $r = 0\%$ (Zero-Return Fallback):**
-  $$PMT = \frac{\text{Funding Gap}}{n}$$
+#### 5. Required Monthly Contribution (Ordinary Annuity)
+Assumes equal end-of-month deposits:
+- **When Assumed Return $r > 0\%$:**
+  $$PMT = \frac{\text{Funding Gap} \times r_m}{(1 + r_m)^N - 1}$$
+- **When Assumed Return $r = 0\%$ (Zero-Return Fallback):**
+  $$PMT = \frac{\text{Funding Gap}}{N}$$
 
-#### 6. Optional Annual Step-Up Contribution (Step 5 — Growing Annuity)
-When an annual step-up rate $g$ ($g > 0$) is chosen, contributions remain constant for 12 months, then increase by $(1 + g)$ at the start of each subsequent year:
-$$\text{Contribution Factor} = \sum_{y=0}^{Y-1} \left[ (1 + g)^y \times \left( \frac{(1 + r_m)^{12} - 1}{r_m} \right) \times (1 + r_m)^{12(Y - y - 1)} \right]$$
-$$\text{Starting Monthly Contribution } P_0 = \frac{\text{Funding Gap}}{\text{Contribution Factor}}$$
-*(When $g = 0\%$, this collapses identically to the standard monthly contribution formula above.)*
+#### 6. Annual Step-Up Contribution (12-Month Compounding Blocks)
+When an annual step-up rate $g$ ($g > 0$) is selected, monthly deposits remain constant within each 12-month period and increase by $(1 + g)$ at the beginning of each subsequent year:
+$$A_{12} = \frac{(1 + r_m)^{12} - 1}{r_m}$$
+$$W = \sum_{k=1}^{Y} (1 + g)^{k-1} \times (1 + r_m)^{12(Y - k)}$$
+$$\text{Starting Monthly Contribution } PMT_1 = \frac{\text{Funding Gap}}{A_{12} \times W}$$
+$$\text{Final Year Monthly Contribution } PMT_Y = PMT_1 \times (1 + g)^{Y - 1}$$
+*(When $g = 0\%$, this formula collapses identically to the standard flat monthly contribution.)*
 
-#### 7. Growth & Contribution Breakdown
+#### 7. Cumulative Contributions & Compounding Growth
 $$\text{Total Contributions} = \sum \text{All Monthly Installments}$$
 $$\text{Illustrative Projected Growth} = \max(0, \, \text{Funding Gap} - \text{Total Contributions})$$
 
 ---
 
-### Demonstration Case Reference
+### Demonstration Reference Case
 
-For validation and QA, GoalBridge provides the reference scenario:
+For auditing and regression verification, GoalBridge specifies the benchmark demonstration case:
 
 - **Inputs**: Higher Education Fund, Cost Today = ₹12,00,000, Horizon = 8 Years, Inflation = 6%, Assumed Return = 10%, Current Savings = ₹1,50,000, Step-up = 0%
-- **Computed Reference Results**:
-  - **Future Goal Value**: $\mathbf{₹19,12,618}$
-  - **Future Value of Savings**: $\mathbf{₹3,32,726}$
+- **Computed Outputs**:
+  - **Future Goal Cost**: $\mathbf{₹19,12,618}$
+  - **Projected Value of Savings**: $\mathbf{₹3,32,726}$
   - **Estimated Funding Gap**: $\mathbf{₹15,79,891}$
-  - **Estimated Monthly Contribution**: $\mathbf{₹10,808 \text{ / month}}$
+  - **Required Monthly Contribution**: $\mathbf{₹10,808 \text{ / month}}$
   - **Total Contributions**: $\mathbf{₹10,37,546}$
-  - **Projected Growth from Compounding**: $\mathbf{₹5,42,345}$
+  - **Projected Compounding Growth**: $\mathbf{₹5,42,345}$
 
 ---
 
-## Technology Used
+## Repository Structure
 
-- **HTML5**: Semantic, accessible markup (`<header>`, `<main>`, `<section>`, `<article>`, `<details>`, `<summary>`, `role="tablist"`, `role="tab"`, `aria-live="polite"`).
-- **CSS3**: Modern responsive layout leveraging CSS Custom Properties (design tokens), CSS Grid, Flexbox, high-contrast states, `:focus-visible`, print stylesheet (`@media print`), and media queries. Zero external CSS frameworks or icon fonts.
-- **Vanilla JavaScript (ES6+)**:
-  - Pure calculation functions without framework overhead.
-  - Zero third-party dependencies or external CDNs.
-  - Native `Intl.NumberFormat('en-IN')` for localization.
-  - Universal export bindings (`globalThis`, `window`, `module.exports`) enabling headless automation, unit testing, and Node.js execution.
+```
+d:\Drisha\Goal Bridge\
+├── index.html                    # Semantic HTML5 single-page application structure
+├── styles.css                    # CSS3 design tokens, responsive layout, @media print
+├── script.js                     # Pure TVM engine, Scenario CRUD, DOM handlers
+├── GoalBridge_Project_Report.pdf # Publication-ready 4-page compiled project report
+├── PROJECT_REPORT.md             # Master project report (9 comprehensive sections)
+├── TEST_EVIDENCE.md              # Completed 18-case test evidence matrix (141 tests)
+├── AI_USE_LOG.md                 # Chronological AI prompt, decision & correction log
+├── AUDIT.md                      # Accessibility, performance & functional audit logs
+└── README.md                     # Project documentation, formulas, and usage guide
+```
+
+---
+
+## Formal Project Documentation & Deliverables
+
+| Document | Format | Description |
+| :--- | :---: | :--- |
+| **[GoalBridge Project Report](GoalBridge_Project_Report.pdf)** | **PDF** | **4-Page formal executive report** covering project planning, problem definition, responsive UI screenshots (Desktop, Tablet, Mobile, Print), mathematical derivations, AI collaboration log, 18-case test table, and reflection. |
+| **[Master Project Report](PROJECT_REPORT.md)** | **MD** | Full 9-section master documentation covering executive summary, user personas, system design, TVM formulas, development history, testing, deployment, and future roadmap. |
+| **[Test Evidence Matrix](TEST_EVIDENCE.md)** | **MD** | Detailed 18-row test verification matrix with inputs, expected vs. actual outcomes, and automated runner output (**141 / 141 Assertions Passed — 100% Pass Rate**). |
+| **[AI Use Log](AI_USE_LOG.md)** | **MD** | Comprehensive record of AI pair-programming interactions, technical design decisions, discrete compounding self-corrections, and automated verification loops across all 6 project milestones. |
+| **[System & Accessibility Audit](AUDIT.md)** | **MD** | Comprehensive technical audit covering WCAG 2.1 AA accessibility, keyboard navigation, Lighthouse scores, and functional edge-case validations. |
 
 ---
 
 ## How to Run Locally
 
-Because GoalBridge has **zero dependencies and no build step**, running it locally is instant.
+GoalBridge requires **no build step, no Node.js compilation, and no external dependencies**.
 
-### Option 1: Direct File Opening
-1. Clone or download the repository:
+### Option 1: Direct File Launch
+1. Clone or download this repository:
    ```bash
    git clone https://github.com/drisha/goal-bridge.git
    ```
-2. Open [`index.html`](index.html) directly in any modern web browser (Google Chrome, Microsoft Edge, Mozilla Firefox, Apple Safari).
+2. Double-click [`index.html`](index.html) or open it directly in Google Chrome, Microsoft Edge, Mozilla Firefox, or Apple Safari.
 
-### Option 2: Using a Lightweight Local HTTP Server
-
-- **Using Python 3:**
+### Option 2: Lightweight Local HTTP Server
+- **Python 3:**
   ```bash
   cd "Goal Bridge"
   python -m http.server 8000
   ```
-  Open `http://localhost:8000` in your browser.
+  Open `http://localhost:8000` in your web browser.
 
-- **Using Node.js (`npx`):**
+- **Node.js (`npx`):**
   ```bash
   cd "Goal Bridge"
   npx serve .
@@ -185,62 +225,67 @@ Because GoalBridge has **zero dependencies and no build step**, running it local
 
 ---
 
-## Testing Summary
+## Testing & Verification Summary
 
-GoalBridge includes automated end-to-end regression tests executed against the real browser DOM in headless Microsoft Edge.
+GoalBridge is verified through automated headless browser test harnesses executed against the live browser DOM using Microsoft Edge:
 
-### Automated Test Suite Results: **76 / 76 PASSED (100%)**
+### Overall Test Suite Results: **141 / 141 Assertions Passed (100%)**
 
-- **Test 1 — Save Valid Scenario**: Confirmed scenario object creation, storage in `savedScenarios` array, and persistence to `sessionStorage` (`goalbridge_saved_scenarios`).
-- **Test 2 — Save Multiple Scenarios**: Confirmed sequential addition of multiple custom scenarios without data collision.
-- **Test 3 — Scenario Numbering**: Confirmed automatic naming fallback ("Scenario 1", "Scenario 2", "Scenario 3") when custom name is omitted.
-- **Test 4 — Custom Scenario Names**: Confirmed user-entered names (e.g. "Eurotrip 2028", "Higher Inflation") are preserved faithfully.
-- **Test 5 — Duplicate Scenario**: Confirmed cloning creates a unique ID, appends `(Copy)` suffix, and preserves all inputs and outputs.
-- **Test 6 — Edit Scenario**: Confirmed edit mode activates status banner, updates inputs/outputs in place, updates name, and cancels/hides banner on save without creating duplicates.
-- **Test 7 — Delete Scenario**: Confirmed scenario deletion removes item from state, updates `sessionStorage`, and refreshes comparison matrix.
-- **Test 8 — Compare 2 Scenarios**: Confirmed side-by-side comparison table renders with sticky parameter rows and column headers when $\ge 2$ scenarios exist.
-- **Test 9 — Compare Multiple Scenarios (3+)**: Confirmed dynamic table expansion for 3+ scenarios and generation of neutral comparative plain-language narrative.
-- **Test 10 — Assumption Preservation**: Confirmed saved scenarios permanently retain their exact inputs (goal name, cost today, years, inflation, return, current savings, step-up) at save time.
-- **Test 11 — Alternate Scenario Independence**: Confirmed "+ Create alternate scenario" copies current assumptions into calculator without mutating the original source scenario.
-- **Test 12 — Edit Isolation**: Confirmed modifying one scenario leaves all other saved scenarios completely untouched.
-- **Test 13 — Session Persistence Across Reload**: Confirmed `loadSavedScenariosFromSession()` restores saved scenarios from `sessionStorage` on page reload.
-- **Test 14 — Complete Session Reset**: Confirmed Reset clears all in-memory scenarios, resets counter, and displays empty state.
-- **Test 15 — Session Storage Reset**: Confirmed Reset removes `goalbridge_saved_scenarios` from `sessionStorage`.
-- **Test 16 — Neutral Calculator State**: Confirmed Reset clears all 6 inputs to blank/₹0, collapses step-up, sets outputs to ₹0, and never restores demo values.
-- **Test 17 — Zero Scenarios State**: Confirmed comparison card and table are hidden when 0 scenarios exist.
-- **Test 18 — Single Scenario State**: Confirmed 1 saved scenario displays in list without falsely rendering comparison table.
-- **Test 19 — Multi-Scenario Trigger**: Confirmed comparison table and narrative automatically display as soon as 2 or more scenarios are saved.
-- **Test 20 — Indian Rupee Formatting (`en-IN`)**: Confirmed `formatCurrency()` formats with Indian grouping (`₹12,00,000`) across cards and tables.
-- **Test 21 — Zero-Return Calculation**: Confirmed scenarios with $r=0\%$ calculate linear contribution ($\text{Gap} / n$) and ₹0 growth.
-- **Test 22 — Step-up Scenario Preservation**: Confirmed scenarios with step-up $>0\%$ preserve their step-up rate and starting contribution.
-- **Test 23 — Core Calculator Regression**: Validated demonstration reference case (Higher Education Fund ₹12L / 8 yrs / 6% inf / 10% ret / ₹1.5L savings: ₹19,12,618 future cost, ₹3,32,726 savings FV, ₹15,79,891 gap, ₹10,808/mo contribution).
-- **Test 24 — Accessibility & Screen Readers**: Confirmed ARIA roles, `aria-live="polite"` status banner, accessible action buttons, and touch targets.
+- **Scenario Management Test Suite**: **76 / 76 Passed**
+  - Scenario creation, auto-naming, deep-cloning, in-place editing, deletion, multi-scenario tabular comparison, proportional visual bars, session persistence, and reset safety.
+- **Print & Download Report Test Suite**: **65 / 65 Passed**
+  - Dedicated `#printReport` isolation, `@media print` style enforcement, plain-text export generation, step-up inclusion, large INR formatting ($\ge$ ₹1 Crore), and regulatory compliance scans.
+
+### Core Test Matrix Overview (18 Audited Cases)
+
+| Test ID | Category | Target Objective | Status |
+| :---: | :--- | :--- | :---: |
+| **TC-01** | Core TVM Math | Demonstration Benchmark (₹12L, 8y, 6% inf, 10% ret): ₹10,808/mo | **PASS** |
+| **TC-02** | Edge Case | Zero Assumed Return ($r=0\%$): Linear allocation ₹10,000/mo, zero growth | **PASS** |
+| **TC-03** | Edge Case | Zero Net Gap ($\text{Savings} \ge \text{Cost}$): ₹0/mo with educational reassurance | **PASS** |
+| **TC-04** | Step-Up Math | 10% Step-Up: Starting ₹7,945/mo, Final Year ₹15,482/mo | **PASS** |
+| **TC-05** | Scenario CRUD | Save Valid Scenario into state and `sessionStorage` | **PASS** |
+| **TC-06** | Scenario CRUD | Auto-Incremented Scenario Naming ("Scenario 1", "Scenario 2") | **PASS** |
+| **TC-07** | Scenario CRUD | Deep-Clone Duplication workflow with `(Copy)` naming | **PASS** |
+| **TC-08** | Scenario CRUD | In-Place Scenario Editing with `#scenarioEditBanner` | **PASS** |
+| **TC-09** | Scenario CRUD | Scenario Deletion and `sessionStorage` synchronization | **PASS** |
+| **TC-10** | Comparison | Side-by-Side Comparison Matrix with neutral narrative | **PASS** |
+| **TC-11** | Visual Bars | Proportional Progress Bars with ARIA progressbar attributes | **PASS** |
+| **TC-12** | Print Report | Dedicated `#printReport` populated with all 10 report sections | **PASS** |
+| **TC-13** | Print Isolation | CSS Print Isolation: web chrome hidden, only report printed | **PASS** |
+| **TC-14** | Download Report | Structured plain-text summary export (`goalbridge-summary.txt`) | **PASS** |
+| **TC-15** | Reset Safety | Complete teardown: inputs, outputs, storage, and print caches | **PASS** |
+| **TC-16** | Large Numbers | Indian Rupee formatting for values $\ge$ ₹1 Crore (`₹1,00,00,000`) | **PASS** |
+| **TC-17** | Compliance | Non-Advisory Keyword Scan: 0 occurrences of prohibited terms | **PASS** |
+| **TC-18** | Accessibility | WCAG 2.1 AA keyboard navigation, contrast $\ge 4.5:1$, touch $\ge 44\text{px}$ | **PASS** |
+
+*For full line-by-line verification logs, consult [`TEST_EVIDENCE.md`](TEST_EVIDENCE.md).*
 
 ---
 
 ## Assumptions and Limitations
 
 1. **End-of-Month Contribution Timing**: All formulas assume contributions occur at the end of each calendar month.
-2. **Constant Rates**: Assumed inflation and investment returns remain constant across the entire planning duration, whereas actual markets fluctuate.
-3. **Compounding Frequency**: Monthly compounding is assumed for both savings growth and contribution accumulation.
+2. **Constant Rates**: Assumed inflation and investment returns remain constant across the entire planning horizon; actual market returns fluctuate.
+3. **Compounding Frequency**: Monthly compounding is applied for both savings growth and monthly contribution accumulation.
 4. **Exclusions**: Calculations exclude taxes, capital gains implications, transaction costs, management fees, advisory charges, and fund expense ratios.
 5. **Static Cash Flows**: Assumes regular, uninterrupted monthly contributions; pauses, windfalls, or emergency withdrawals are not modeled.
 
 ---
 
-## Educational-Use Disclaimer
+## Regulatory Notice & Non-Advisory Disclaimer
 
 > **IMPORTANT NOTICE**  
-> 1. This calculator is strictly for educational and illustrative purposes only. It does not constitute financial, investment, tax, or legal advice and does not recommend any specific investment product, security, or strategy.  
-> 2. Future values are mathematical projections based solely on the assumptions entered. Actual inflation rates, market returns, and future living costs may differ materially from illustrative scenarios.  
-> 3. Investment returns are not guaranteed. Higher return assumptions carry higher investment risk, including potential loss of principal.  
-> 4. Taxes, transaction fees, brokerage commissions, and investment expense ratios are not factored into these figures; these costs will reduce net returns.  
-> 5. Historical price trends and inflation figures are not a guarantee of future economic performance.  
-> 6. Always consult a qualified SEBI-registered investment adviser or certified financial planner before making financial decisions.
+> 1. **Educational Purpose Only**: GoalBridge is strictly an educational and illustrative planning utility. It does not constitute financial, investment, tax, or legal advice under the Securities and Exchange Board of India (Investment Advisers) Regulations, 2013, or any other applicable regulations.  
+> 2. **No Product Endorsement**: GoalBridge does not recommend, sponsor, endorse, or promote any specific financial instrument, security, mutual fund scheme, insurance policy, or portfolio manager.  
+> 3. **Mathematical Projections**: All future values and contribution amounts are hypothetical projections based solely on the assumptions entered by the user. Actual inflation, market performance, and cost of living changes may differ materially from illustrative figures.  
+> 4. **No Guaranteed Returns**: Investment returns are not guaranteed. Projections involving higher return assumptions entail higher market volatility and risk of capital loss.  
+> 5. **Taxes and Fees Excluded**: Projections do not account for taxation, expense ratios, exit loads, or transaction costs, which reduce real-world investment outcomes.  
+> 6. **Professional Consultation**: Users must consult a qualified SEBI-registered investment adviser (RIA) or certified financial planner before executing any financial commitments or investment decisions.
 
 ---
 
-## Author
+## Author & Credits
 
 Created with care by **Drisha**  
-Dedicated to empowering early-career professionals and first-time earners with financial clarity and independent scenario planning.
+Dedicated to empowering first-time earners and young families with financial clarity, mathematical rigor, and independent scenario planning.
